@@ -677,3 +677,46 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 .hash-rule{height:9px;background:
   repeating-linear-gradient(90deg,rgba(15,27,60,.42) 0 2px,transparent 2px 28px) center/100% 7px no-repeat,
   linear-gradient(var(--line-on-light),var(--line-on-light)) center/100% 1px no-repeat}
+
+/* ══════════════ HERO PHOTOGRAPH ══════════════
+   Skyline under a red wash. The photo carries the place, the wash carries the
+   brand, and the chalk play diagram sits over both. Contrast for the hero text
+   comes from the wash plus a vertical scrim, not from luck. */
+.hero-section.has-photo{position:relative;isolation:isolate}
+.hero-section.has-photo::before{content:"";position:absolute;inset:0;z-index:-2;
+  background-image:var(--hero-img);background-size:cover;background-position:center 62%;
+  filter:saturate(.55) contrast(1.06)}
+.hero-section.has-photo::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:
+    linear-gradient(180deg,rgba(11,17,38,.52) 0%,rgba(11,17,38,.12) 26%,rgba(122,9,24,.30) 72%,rgba(122,9,24,.66) 100%),
+    linear-gradient(0deg,rgba(200,16,46,.80),rgba(200,16,46,.80))}
+.hero-section.has-photo .hero-bg{opacity:.42}
+.hero-section.has-photo .hero{position:relative;z-index:1}
+.hero-section.has-photo .wordmark,.hero-section.has-photo .ofline{text-shadow:0 4px 22px rgba(11,17,38,.55),0 2px 0 var(--red-shadow)}
+.hero-section.has-photo .tagline{text-shadow:0 1px 10px rgba(11,17,38,.5)}
+
+/* ══════════════ SCRAPBOOK BAND ══════════════
+   A divider between the product and the reference material. Washed hard so it
+   reads as texture behind type, never as a photo competing with it. */
+.scrapbook{position:relative;isolation:isolate;padding:76px 0;text-align:center;overflow:hidden;
+  border-top:2px solid var(--navy);border-bottom:2px solid var(--navy)}
+.scrapbook::before{content:"";position:absolute;inset:0;z-index:-2;
+  background-image:var(--band-img);background-size:cover;background-position:center;
+  filter:saturate(.4) contrast(1.05)}
+.scrapbook::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(15,27,60,.90) 0%,rgba(15,27,60,.80) 45%,rgba(122,9,24,.86) 100%)}
+.sb-label{display:block;font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;
+  letter-spacing:.34em;font-size:12.5px;color:var(--white);opacity:.82;margin-bottom:14px}
+.sb-copy{max-width:46ch;margin:0 auto;font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;
+  text-transform:uppercase;font-size:clamp(20px,2.8vw,32px);line-height:1.18;color:#fff;
+  text-shadow:0 3px 0 var(--red-shadow),0 2px 18px rgba(11,17,38,.5)}
+@media (max-width:860px){.scrapbook{padding:52px 0}}
+
+/* ---- hero with a photograph behind it needs less shouting ---- */
+.hero-section.has-photo .hero{padding:76px 0 88px}
+.hero-section.has-photo .wordmark{font-size:clamp(58px,10.5vw,148px);max-width:100%}
+.hero-section.has-photo .ofline{font-size:clamp(18px,2.4vw,30px);margin-top:12px}
+.hero-section.has-photo .hero-bg{opacity:.26}
+.hero-section.has-photo .eyebrow{margin-bottom:26px}
+/* a long wordmark (The College Fan) must never run off the edge */
+.hero .wordmark{max-width:100%;overflow-wrap:break-word}

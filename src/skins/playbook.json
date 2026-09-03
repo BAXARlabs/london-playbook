@@ -76,5 +76,9 @@
   "tours": {
     "exclude": [],
     "overrides": {}
+  },
+  "media": {
+    "hero": "assets/images/hero-london.jpg",
+    "band": "assets/images/london-scrapbook.jpg"
   }
 }

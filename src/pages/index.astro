@@ -17,13 +17,15 @@ const venues = (skin.event.venues || []).map(k => venuesData[k]).filter(Boolean)
 const exTips = new Set(skin.tips?.exclude || []);
 const tips = tipsData.filter(t => !exTips.has(t.id));
 const stationCount = venues.reduce((a, v) => a + v.stations.length, 0);
+const heroImg = skin.media?.hero ? `${base}/${skin.media.hero}` : null;
+const bandImg = skin.media?.band ? `${base}/${skin.media.band}` : null;
 const enquiry = skin.enquiryUrl || 'mailto:hello@aileronvip.com?subject=London%20Playbook%20enquiry';
 
 let n = 0; const no = () => String(++n).padStart(2, '0');
 const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_AROUND = no(), N_TIPS = no(), N_WORDS = no();
 ---
 <Base>
-<section class="red-canvas hero-section">
+<section class={`red-canvas hero-section${heroImg ? ' has-photo' : ''}`} style={heroImg ? `--hero-img:url(${heroImg})` : undefined}>
   <HeroBg />
   <div class="hero wrap">
     <div class="eyebrow small-caps">{skin.hero.eyebrow}</div>
@@ -123,6 +125,15 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_AROUND = no(), N_TIPS
     </div>
   </div>
 </section>
+
+{bandImg && (
+<section class="scrapbook" style={`--band-img:url(${bandImg})`} aria-hidden="true">
+  <div class="wrap">
+    <span class="sb-label">The rest of the playbook</span>
+    <p class="sb-copy">Everything you need before you land — and everything you'll wish someone had told you.</p>
+  </div>
+</section>
+)}
 
 <div class="folds wrap"><div class="sheet">
   <Fold no={N_AROUND} sit="Open Field" title="Getting Around London" id="getting-around" meta={`${transport.cards.length} things to know`}>
