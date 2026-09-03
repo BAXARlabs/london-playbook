@@ -244,7 +244,7 @@
   .filter.active{background:var(--red);color:var(--white);border-color:var(--red)}
 
   .tour-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
-  .tour{background:var(--white);color:var(--ink);border-radius:6px;overflow:hidden;border:1px solid var(--line-on-light);position:relative;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s ease,border-color .3s ease;cursor:pointer;opacity:0;transform:translateY(20px)}
+  .tour{background:var(--white);color:var(--ink);border-radius:6px;overflow:hidden;border:1px solid var(--line-on-light);position:relative;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s ease,border-color .3s ease;cursor:pointer}
   .tour.in{opacity:1;transform:translateY(0)}
   .tour:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(0,0,0,.12);border-color:var(--red)}
   .tour .img{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,var(--navy),var(--red));overflow:hidden}
@@ -327,7 +327,7 @@
   footer li a:hover{color:var(--red)}
   footer .legal{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);font-size:12px;opacity:.7;flex-wrap:wrap;gap:12px}
 
-  .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+  .reveal{transition:opacity .6s ease,transform .6s ease}
   .reveal.in{opacity:1;transform:translateY(0)}
 
   /* ============== MOBILE ============== */
@@ -444,3 +444,15 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 .tour-highlights{list-style:none;padding:0;margin:18px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px 28px}
 .tour-highlights li{position:relative;padding-left:30px;font-size:16px;line-height:1.6;color:var(--ink)}
 .tour-highlights li::before{content:"✕";position:absolute;left:0;top:1px;color:var(--red);font-family:'Permanent Marker',cursive;font-size:15px}
+
+/* ---- scroll-in animation ----
+   Only applies once JS has set .js-anim on <html>, so the content is visible
+   with JS off, with JS broken, and to anything that does not run JS at all.
+   Also disabled for reduced-motion. */
+.js-anim .tour,
+.js-anim .reveal{opacity:0;transform:translateY(20px)}
+.js-anim .tour.in,
+.js-anim .reveal.in{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){
+  .js-anim .tour,.js-anim .reveal{opacity:1;transform:none;transition:none}
+}
