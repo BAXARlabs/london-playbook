@@ -1,0 +1,153 @@
+---
+import Base from '../layouts/Base.astro';
+import skin from '../skin.js';
+import HeroBg from '../components/HeroBg.astro';
+import toursData from '../data/tours.json';
+const base = (skin.site.basePath || '').replace(/\/$/, '');
+const ex = new Set(skin.tours?.exclude || []);
+const tours = toursData.filter(t => !ex.has(t.n)).map(t => ({ ...t, ...(skin.tours?.overrides?.[t.n] || {}) }));
+const cats = [...new Map(tours.map(t => [t.cat, t.catLabel])).entries()];
+---
+<Base>
+<section class="red-canvas hero-section">
+  <HeroBg />
+  <div class="hero wrap">
+    <div class="eyebrow small-caps">{skin.hero.eyebrow}</div>
+    <h1 class="wordmark" set:html={skin.brand.wordmarkTop}></h1>
+    <span class="ofline" set:html={skin.brand.wordmarkBottom}></span>
+    <div class="subtag">{skin.hero.subtag}</div>
+    <p class="tagline" set:html={skin.hero.tagline}></p>
+    <div class="ctas">
+      <a class="btn on-red" href="#lineup">{skin.hero.ctaPrimary}</a>
+      <a class="btn on-red-outline" href={skin.event.enabled ? '#gameday' : '#more'}>{skin.hero.ctaSecondary}</a>
+    </div>
+  </div>
+</section>
+
+<section class="scoreboard-section tft-watermark" id="scoreboard">
+  <div class="wrap">
+    <div class="label">Pre-Snap Read · The Numbers · Pre-Snap Read</div>
+    <div class="scoreboard">
+      {skin.scoreboard.map(s => (
+        <div class="stat">
+          <div class="n" data-count={s.star ? undefined : s.n} data-pad={s.pad || 0} data-comma={s.comma ? 1 : undefined}>{s.star ? '★' : (s.pad ? '00' : '0')}</div>
+          <div class="l">{s.label}</div>
+          <div class="sub">{s.sub}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+{skin.event.enabled && (
+<section class="red-canvas" id="gameday">
+  <div class="gameday wrap">
+    <div class="section-no">01 · Game Day</div>
+    <div class="label">{skin.event.label}</div>
+    <h3 set:html={skin.event.matchup}></h3>
+    <div class="where">{skin.event.where}</div>
+    <div class="countdown" id="cd" data-kickoff={skin.event.kickoff}>
+      <div class="cd-cell"><div class="num" data-cd="d">000</div><div class="lbl">Days</div></div>
+      <div class="cd-cell"><div class="num" data-cd="h">00</div><div class="lbl">Hours</div></div>
+      <div class="cd-cell"><div class="num" data-cd="m">00</div><div class="lbl">Minutes</div></div>
+      <div class="cd-cell"><div class="num" data-cd="s">00</div><div class="lbl">Seconds</div></div>
+    </div>
+  </div>
+</section>
+)}
+
+<section class="lineup tft-watermark" id="lineup">
+  <div class="wrap">
+    <div class="section-no">02 · The Starting Lineup</div>
+    <h2 class="display">Your {tours.length} Tours of London</h2>
+    <div class="section-sub">Pick a play. Run the city.</div>
+    <div class="filters">
+      <button class="filter active" data-cat="all">All Tours</button>
+      {cats.map(([c, l]) => <button class="filter" data-cat={c}>{l}</button>)}
+    </div>
+    <div class="tour-grid" id="tourGrid">
+      {tours.map(t => (
+        <a class="tour" data-cat={t.cat} href={`${base}/tours/${t.slug}/`}>
+          <div class="img">
+            <img src={t.img} alt={t.title} loading="lazy" />
+            <div class="num-medallion">{t.n}</div>
+            <div class="cat-pill">{t.catLabel}</div>
+          </div>
+          <div class="body">
+            <div class="tour-label">Tour {t.n}</div>
+            <h3>{t.title}</h3>
+            <p class="desc">{t.short}</p>
+            <div class="meta"><span class="dur">⏱ {t.dur}</span><span class="transport">{t.transport}</span></div>
+          </div>
+          <div class="footer-bar"><span>View Tour</span><span>↗</span></div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="red-canvas">
+  <div class="midband wrap">
+    <span class="small-caps">{skin.hero.eyebrow}</span>
+    <h2 class="display">London Is<br>Yours to Explore</h2>
+    <div class="ft">Expert Guides · Small Groups · Unforgettable Stories</div>
+  </div>
+</section>
+
+<section class="intel tft-watermark" id="intel">
+  <div class="wrap">
+    <div class="section-no">03 · Insider Intel</div>
+    <h2 class="display">Fan Tips for London</h2>
+    <div class="section-sub">Quick plays from the locals' playbook</div>
+    <div class="intel-grid">
+      <div class="tip"><div class="icon">🚇</div><h4>Ride the Tube</h4><p>Tap your US contactless card — no Oyster needed. Avoid the Central line during rush hour. Mind the gap. It's literal.</p></div>
+      <div class="tip"><div class="icon">🍺</div><h4>Pub Etiquette</h4><p>Order at the bar, not the table. No tipping expected. Last orders bell rings 15 mins before closing. Don't miss a proper pint of bitter.</p></div>
+      <div class="tip"><div class="icon">🚕</div><h4>Black Cab Culture</h4><p>London cabbies pass "The Knowledge" — a 3-year exam. They're your best source of local intel. Always tip them, they've earned it.</p></div>
+      <div class="tip"><div class="icon">⏰</div><h4>Book Ahead</h4><p>London's best experiences sell out fast on game weekends. Book your tours the moment you land — you won't regret it.</p></div>
+      <div class="tip"><div class="icon">🇺🇸</div><h4>Americans in London</h4><p>Benjamin Franklin lived here. John Adams too. London shaped the very ideas of your nation — our Founding Fathers tour tells the whole story.</p></div>
+      <div class="tip"><div class="icon">📸</div><h4>Photo Hotspots</h4><p>Tower Bridge at dusk. Parliament from Westminster Bridge. Greenwich Hill view. The glass walkway at One New Change. All free. All extraordinary.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="more tft-watermark" id="more">
+  <div class="wrap">
+    <span class="small-caps">More Coming Soon</span>
+    <h2 class="display">More Plays<br>in the Book</h2>
+    <p>Dining guides, cocktail bars, match-day pubs, and day trips from London — all dropping soon. Sign up and we'll keep you in the loop.</p>
+    <a class="btn primary" href={skin.enquiryUrl || '#more'}>Stay in the Loop ↗</a>
+  </div>
+</section>
+</Base>
+
+<script>
+  const cd = document.getElementById('cd');
+  if (cd) {
+    const K = new Date(cd.dataset.kickoff).getTime();
+    const pad = (n, w) => String(n).padStart(w, '0');
+    const set = (k, v) => { const e = cd.querySelector(`[data-cd="${k}"]`); if (e) e.textContent = v; };
+    (function tick() {
+      let s = Math.max(0, Math.floor((K - Date.now()) / 1000));
+      const d = Math.floor(s / 86400); s -= d * 86400;
+      const h = Math.floor(s / 3600); s -= h * 3600;
+      const m = Math.floor(s / 60); s -= m * 60;
+      set('d', pad(d, 3)); set('h', pad(h, 2)); set('m', pad(m, 2)); set('s', pad(s, 2));
+      setTimeout(tick, 1000);
+    })();
+  }
+  document.querySelectorAll('.filter').forEach(f => f.addEventListener('click', () => {
+    document.querySelectorAll('.filter').forEach(x => x.classList.remove('active'));
+    f.classList.add('active');
+    const c = f.dataset.cat;
+    document.querySelectorAll('.tour').forEach(t => { t.style.display = (c === 'all' || t.dataset.cat === c) ? '' : 'none'; });
+  }));
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = +el.dataset.count, w = +el.dataset.pad || 0, comma = el.dataset.comma;
+    let i = 0; const step = Math.max(1, Math.round(target / 40));
+    const t = setInterval(() => {
+      i = Math.min(target, i + step);
+      el.textContent = comma ? i.toLocaleString() : String(i).padStart(w, '0');
+      if (i >= target) clearInterval(t);
+    }, 25);
+  });
+</script>

@@ -1,0 +1,50 @@
+{
+  "id": "playbook",
+  "name": "London Playbook",
+  "site": {
+    "title": "London Playbook — The American Sports Fan's Guide to London",
+    "description": "12 handpicked London experiences, insider-approved and expertly guided. Built for American sports fans crossing the Atlantic for the game.",
+    "url": "https://aileronvip.com/london-playbook",
+    "basePath": "/london-playbook"
+  },
+  "tokens": {
+    "--red": "#C8102E",
+    "--red-deep": "#A60D24",
+    "--red-shadow": "#7A0918",
+    "--navy": "#0F1B3C",
+    "--navy-deep": "#08122A"
+  },
+  "brand": {
+    "wordmarkTop": "London",
+    "wordmarkBottom": "Playbook",
+    "navMark": "London",
+    "navCity": "Playbook"
+  },
+  "partners": {
+    "label": "An",
+    "items": [
+      { "img": "assets/images/aileron-vip.png", "alt": "Aileron VIP", "cls": "logo-img-pa" }
+    ],
+    "suffix": "product"
+  },
+  "hero": {
+    "eyebrow": "American Football in London · The Fan's City Guide",
+    "subtag": "Beyond the Endzone · See the Whole City",
+    "tagline": "You've crossed the Atlantic for the game of a lifetime — and the trip is more than kickoff. Now make every hour count. <strong>12 handpicked London experiences</strong>, insider-approved and expertly guided.",
+    "ctaPrimary": "See All Tours ↓",
+    "ctaSecondary": "Plan Your Trip"
+  },
+  "scoreboard": [
+    { "n": 12, "label": "Curated Tours", "sub": "Browse all" },
+    { "n": 4, "pad": 2, "label": "American Football Games in London", "sub": "UJC + NFL" },
+    { "n": 1983, "comma": true, "label": "Years of History", "sub": "Founded 43 AD" },
+    { "star": true, "label": "Stories to Tell", "sub": "9 million stories" }
+  ],
+  "event": {
+    "enabled": false
+  },
+  "tours": {
+    "exclude": [],
+    "overrides": {}
+  }
+}

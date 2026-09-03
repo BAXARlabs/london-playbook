@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import skin from '../../skin.js';
+import toursData from '../../data/tours.json';
+
+export async function getStaticPaths() {
+  const s = (await import('../../skin.js')).default;
+  const data = (await import('../../data/tours.json')).default;
+  const ex = new Set(s.tours?.exclude || []);
+  return data.filter(t => !ex.has(t.n)).map(t => ({
+    params: { slug: t.slug },
+    props: { tour: { ...t, ...(s.tours?.overrides?.[t.n] || {}) } },
+  }));
+}
+
+const { tour } = Astro.props;
+const base = (skin.site.basePath || '').replace(/\/$/, '');
+const desc = tour.short;
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'TouristAttraction',
+  name: tour.title,
+  description: tour.short,
+  image: tour.img,
+  touristType: 'American sports fans visiting London',
+  isPartOf: { '@type': 'WebSite', name: skin.name, url: skin.site.url },
+};
+---
+<Base title={`${tour.title} — ${skin.name}`} description={desc} path={`/tours/${tour.slug}/`}>
+<script type="application/ld+json" set:html={JSON.stringify(ld)}></script>
+
+<section class="red-canvas hero-section tour-hero">
+  <div class="hero wrap">
+    <div class="eyebrow small-caps">Tour {tour.n} · {tour.catLabel}</div>
+    <h1 class="display">{tour.title}</h1>
+    <div class="subtag">⏱ {tour.dur} · {tour.transport}</div>
+    <p class="tagline">{tour.short}</p>
+    <div class="ctas">
+      <a class="btn on-red" href={tour.bookingUrl || skin.enquiryUrl || `${base}/#more`}>Book This Tour ↗</a>
+      <a class="btn on-red-outline" href={`${base}/#lineup`}>← All Tours</a>
+    </div>
+  </div>
+</section>
+
+<section class="intel tft-watermark">
+  <div class="wrap tour-detail">
+    <div class="section-no">About This Tour</div>
+    {tour.desc.split('\n\n').map(p => <p class="tour-para">{p}</p>)}
+
+    <div class="section-no" style="margin-top:48px">Tour Highlights</div>
+    <ul class="tour-highlights">
+      {tour.highlights.map(h => <li>{h}</li>)}
+    </ul>
+
+    <div class="ctas" style="margin-top:40px">
+      <a class="btn primary" href={tour.bookingUrl || skin.enquiryUrl || `${base}/#more`}>Book This Tour ↗</a>
+    </div>
+  </div>
+</section>
+</Base>

@@ -1,0 +1,99 @@
+---
+import skin from '../skin.js';
+import '../styles/base.css';
+const { title, description, path = '' } = Astro.props;
+const base = (skin.site.basePath || '').replace(/\/$/, '');
+const canonical = skin.site.url.replace(/\/$/, '') + path;
+const tokens = Object.entries(skin.tokens || {}).map(([k, v]) => `${k}:${v}`).join(';');
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{title || skin.site.title}</title>
+<meta name="description" content={description || skin.site.description}>
+<link rel="canonical" href={canonical}>
+<meta property="og:type" content="website">
+<meta property="og:title" content={title || skin.site.title}>
+<meta property="og:description" content={description || skin.site.description}>
+<meta property="og:url" content={canonical}>
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Permanent+Marker&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+{tokens && <style set:html={`:root{${tokens}}`}></style>}
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div class="band-stripe"></div>
+
+<div class="partner-bar">
+  <div class="wrap inner">
+    <span class="pl-label">{skin.partners.label}</span>
+    {skin.partners.items.map((p) => p.x
+      ? <span class="pl-x">×</span>
+      : <img class={`logo-img ${p.cls || ''}`} src={`${base}/${p.img}`} alt={p.alt} />)}
+    {skin.partners.suffix && <span class="pl-label">{skin.partners.suffix}</span>}
+  </div>
+</div>
+
+<nav class="top">
+  <div class="wrap inner">
+    <a href={base + '/'} class="mark">
+      <span class="marker" set:html={skin.brand.navMark}></span>
+      <span class="city" set:html={skin.brand.navCity}></span>
+    </a>
+    <div class="links">
+      {skin.event.enabled && <a href={base + '/#gameday'}>Game Day</a>}
+      <a href={base + '/#lineup'}>The Lineup</a>
+      <a href={base + '/#intel'}>Insider Intel</a>
+      <a href={base + '/#more'}>Coming Soon</a>
+    </div>
+    <a href={base + '/#lineup'} class="cta-mini">See All Tours ↗</a>
+  </div>
+</nav>
+
+<main id="main"><slot /></main>
+
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <div class="brand">
+        <span class="marker" set:html={skin.brand.navMark}></span>
+        <div class="city-line" set:html={skin.brand.navCity}></div>
+        <p>{skin.site.description}</p>
+        <div class="footer-partners">
+          <span class="pl-label">{skin.partners.label}</span>
+          {skin.partners.items.map((p) => p.x
+            ? <span class="pl-x">×</span>
+            : <img class={`logo-img ${p.cls || ''}`} src={`${base}/${p.img}`} alt={p.alt} />)}
+        </div>
+      </div>
+      <div>
+        <h5>The Playbook</h5>
+        <ul>
+          {skin.event.enabled && <li><a href={base + '/#gameday'}>Game Day Countdown</a></li>}
+          <li><a href={base + '/#lineup'}>All 12 Tours</a></li>
+          <li><a href={base + '/#intel'}>Insider Intel</a></li>
+          <li><a href={base + '/#more'}>More Coming Soon</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Events</h5>
+        <ul><li>Union Jack Classic</li><li>NFL London Series</li><li>Tottenham Stadium</li><li>Wembley Stadium</li></ul>
+      </div>
+      <div>
+        <h5>Stay In Touch</h5>
+        <ul><li><a href={base + '/#more'}>Newsletter</a></li><li>Instagram</li><li>Email</li></ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 {skin.name} · A BAXARlabs project</span>
+      <span>Privacy · Terms</span>
+    </div>
+  </div>
+</footer>
+<div class="band-stripe"></div>
+</body>
+</html>

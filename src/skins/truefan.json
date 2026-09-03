@@ -1,0 +1,52 @@
+{
+  "id": "truefan",
+  "name": "Xs & Os of London",
+  "extends": "playbook",
+  "site": {
+    "title": "Xs & Os of London — Fans' Ultimate Playbook to the City",
+    "description": "12 handpicked London experiences for the Philly faithful. Insider-approved, expertly guided, built around NFL London 2026.",
+    "url": "https://xs-and-os-london.vercel.app",
+    "basePath": ""
+  },
+  "brand": {
+    "wordmarkTop": "Xs &amp; Os",
+    "wordmarkBottom": "OF LONDON",
+    "navMark": "Xs &amp; Os",
+    "navCity": "of London"
+  },
+  "partners": {
+    "label": "Powered By",
+    "items": [
+      {
+        "img": "assets/images/truefan-philly-sports-trips.png",
+        "alt": "TrueFan Travel × Philly Sports Trips",
+        "cls": "logo-img-pst"
+      },
+      {
+        "x": true
+      },
+      {
+        "img": "assets/images/passyunk-avenue.png",
+        "alt": "Passyunk Avenue",
+        "cls": "logo-img-pa"
+      }
+    ],
+    "suffix": null
+  },
+  "hero": {
+    "eyebrow": "American Football in London · Official Fan Guide",
+    "subtag": "Beyond the Endzone · See the Whole City",
+    "tagline": "The <strong>Eagles are back in London</strong>. You've crossed the Atlantic for the game of a lifetime — and the <strong>NFL London Series</strong> is more than kickoff. Now make every hour count. <strong>12 handpicked London experiences</strong>, insider-approved and expertly guided, built for the Philly faithful.",
+    "ctaPrimary": "See All Tours ↓",
+    "ctaSecondary": "Game Day Countdown"
+  },
+  "event": {
+    "enabled": true,
+    "label": "Time Until Kickoff",
+    "matchup": "Philadelphia Eagles<br>vs Jacksonville Jaguars",
+    "where": "Tottenham Hotspur Stadium · NFL London 2026",
+    "kickoff": "2026-10-11T14:30:00+01:00",
+    "kickoffConfirmed": true
+  },
+  "watermark": "assets/images/truefan-watermark-tile.png"
+}

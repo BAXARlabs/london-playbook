@@ -1,0 +1,67 @@
+{
+  "id": "ujc",
+  "name": "The College Fan Playbook to London",
+  "extends": "playbook",
+  "site": {
+    "title": "College Fan Playbook to London — Union Jack Classic 2026 Fan Guide",
+    "description": "Kansas v Arizona State at Wembley. 12 handpicked London experiences for college football fans making the trip.",
+    "url": "https://ujc-playbook.vercel.app",
+    "basePath": ""
+  },
+  "tokens": {
+    "--red": "#C8102E",
+    "--team-a": "#0051BA",
+    "--team-a-alt": "#E8000D",
+    "--team-b": "#8C1D40",
+    "--team-b-alt": "#FFC627"
+  },
+  "brand": {
+    "wordmarkTop": "The College Fan",
+    "wordmarkBottom": "PLAYBOOK",
+    "navMark": "College Fan",
+    "navCity": "Playbook"
+  },
+  "hero": {
+    "eyebrow": "Union Jack Classic · Wembley · 19 September 2026",
+    "subtag": "Beyond the Endzone · See the Whole City",
+    "tagline": "<strong>Kansas v Arizona State</strong> at Wembley — the first FBS college game in England. You've crossed the Atlantic for it. Now make every hour count. <strong>12 handpicked London experiences</strong>, insider-approved and expertly guided.",
+    "ctaPrimary": "See All Tours ↓",
+    "ctaSecondary": "Game Day Countdown"
+  },
+  "event": {
+    "enabled": true,
+    "label": "Time Until Kickoff",
+    "matchup": "Kansas Jayhawks<br>vs Arizona State Sun Devils",
+    "where": "Wembley Stadium · Union Jack Classic 2026",
+    "kickoff": "2026-09-19T17:00:00+01:00",
+    "kickoffConfirmed": true,
+    "split": true
+  },
+  "scoreboard": [
+    {
+      "n": 12,
+      "label": "Curated Tours",
+      "sub": "Browse all"
+    },
+    {
+      "n": 1,
+      "pad": 2,
+      "label": "First FBS Game in England",
+      "sub": "Big 12 at Wembley"
+    },
+    {
+      "n": 1983,
+      "comma": true,
+      "label": "Years of History",
+      "sub": "Founded 43 AD"
+    },
+    {
+      "star": true,
+      "label": "Stories to Tell",
+      "sub": "9 million stories"
+    }
+  ],
+  "partners": {
+    "suffix": null
+  }
+}

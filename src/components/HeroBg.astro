@@ -1,0 +1,86 @@
+---
+// Shared chalkboard play diagram behind every hero. Skin-neutral.
+---
+  <div class="hero-bg" aria-hidden="true">
+    <!-- Chalk-style play diagram — shared across all skins -->
+    <svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <filter id="rough">
+          <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="3"/>
+          <feDisplacementMap in="SourceGraphic" scale="2"/>
+        </filter>
+      </defs>
+      <g stroke="#ffffff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#rough)">
+
+        <!-- Line of scrimmage -->
+        <line x1="160" y1="200" x2="1040" y2="200" stroke-dasharray="6 6" stroke-width="1.5" opacity=".6"/>
+
+        <!-- Defense X's (top row) -->
+        <g font-family="Permanent Marker, cursive" font-size="42" fill="#ffffff" stroke="none" text-anchor="middle">
+          <text x="320" y="155">X</text>
+          <text x="430" y="145">X</text>
+          <text x="540" y="150">X</text>
+          <text x="650" y="148">X</text>
+          <text x="760" y="155">X</text>
+          <text x="870" y="158">X</text>
+          <text x="200" y="170">X</text>
+          <text x="980" y="172">X</text>
+        </g>
+
+        <!-- Offensive line O's -->
+        <g font-family="Permanent Marker, cursive" font-size="38" fill="#ffffff" stroke="none" text-anchor="middle">
+          <text x="400" y="260">O</text>
+          <text x="475" y="258">O</text>
+          <text x="550" y="262">O</text>
+          <text x="625" y="260">O</text>
+          <text x="700" y="262">O</text>
+          <text x="775" y="258">O</text>
+          <text x="850" y="260">O</text>
+        </g>
+
+        <!-- QB Foles -->
+        <text x="625" y="340" font-family="Permanent Marker, cursive" font-size="42" fill="#ffffff" stroke="none" text-anchor="middle">O</text>
+        <text x="660" y="345" font-family="Permanent Marker, cursive" font-size="18" fill="#ffffff" stroke="none">QB</text>
+
+        <!-- RB Clement -->
+        <text x="710" y="400" font-family="Permanent Marker, cursive" font-size="42" fill="#ffffff" stroke="none" text-anchor="middle">O</text>
+        <text x="745" y="405" font-family="Permanent Marker, cursive" font-size="18" fill="#ffffff" stroke="none">RB</text>
+
+        <!-- TE Burton (split right, motions left) -->
+        <text x="930" y="280" font-family="Permanent Marker, cursive" font-size="42" fill="#ffffff" stroke="none" text-anchor="middle">O</text>
+        <text x="965" y="285" font-family="Permanent Marker, cursive" font-size="18" fill="#ffffff" stroke="none">TE</text>
+
+        <!-- Routes — the trick play -->
+        <!-- Snap: from center to RB -->
+        <path d="M 625 270 Q 660 320 710 380" stroke-dasharray="5 5"/>
+        <polygon points="710,380 702,373 706,388" fill="#ffffff" stroke="none"/>
+
+        <!-- RB pitches to TE (running left then right) -->
+        <path d="M 710 400 Q 820 460 930 300" stroke-dasharray="5 5"/>
+        <polygon points="930,300 920,308 924,320" fill="#ffffff" stroke="none"/>
+
+        <!-- TE throws back to QB Foles (now sneaking forward) -->
+        <path d="M 930 270 Q 800 200 660 170"/>
+        <polygon points="660,170 670,165 672,180" fill="#ffffff" stroke="none"/>
+
+        <!-- Foles route up the middle -->
+        <path d="M 625 320 Q 580 220 540 110"/>
+        <polygon points="540,110 532,118 550,118" fill="#ffffff" stroke="none"/>
+
+        <!-- Football icon at endzone -->
+        <g transform="translate(490, 80) rotate(-20)">
+          <ellipse cx="0" cy="0" rx="22" ry="11" fill="#ffffff" stroke="none"/>
+          <line x1="-12" y1="0" x2="12" y2="0" stroke="var(--red)" stroke-width="2"/>
+          <line x1="-8" y1="-4" x2="-8" y2="4" stroke="var(--red)" stroke-width="1.5"/>
+          <line x1="-4" y1="-4" x2="-4" y2="4" stroke="var(--red)" stroke-width="1.5"/>
+          <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--red)" stroke-width="1.5"/>
+          <line x1="4" y1="-4" x2="4" y2="4" stroke="var(--red)" stroke-width="1.5"/>
+          <line x1="8" y1="-4" x2="8" y2="4" stroke="var(--red)" stroke-width="1.5"/>
+        </g>
+
+        <!-- Endzone label -->
+        <text x="540" y="555" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="22" fill="#ffffff" stroke="none" opacity=".7">TOUCHDOWN.</text>
+
+      </g>
+    </svg>
+  </div>
