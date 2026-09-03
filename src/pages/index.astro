@@ -6,6 +6,7 @@ import toursData from '../data/tours.json';
 import venuesData from '../data/venues.json';
 import transport from '../data/transport.json';
 import tipsData from '../data/tips.json';
+import glossary from '../data/glossary.json';
 const base = (skin.site.basePath || '').replace(/\/$/, '');
 const ex = new Set(skin.tours?.exclude || []);
 const tours = toursData.filter(t => !ex.has(t.n)).map(t => ({ ...t, ...(skin.tours?.overrides?.[t.n] || {}) }));
@@ -163,6 +164,25 @@ const NO_GAMEDAY = no(), NO_THERE = no(), NO_LINEUP = no(), NO_AROUND = no(), NO
         <div class="tip"><div class="icon">{t.icon}</div><h4>{t.title}</h4><p set:html={t.body}></p></div>
       ))}
     </div>
+
+    <div class="glossary">
+      <div class="gl-head">
+        <h3>Speak the Language</h3>
+        <p>{glossary.intro}</p>
+      </div>
+      <div class="gl-grid">
+        {glossary.pairs.map(p => (
+          <div class={`gl-pair${p.flag ? ' flagged' : ''}`}>
+            <div class="gl-row">
+              <span class="gl-us">{p.us}</span>
+              <span class="gl-arrow">→</span>
+              <span class="gl-uk">{p.uk}</span>
+            </div>
+            {p.note && <p class="gl-note">{p.note}</p>}
+          </div>
+        ))}
+      </div>
+    </div>
   </div>
 </section>
 
@@ -185,9 +205,9 @@ const NO_GAMEDAY = no(), NO_THERE = no(), NO_LINEUP = no(), NO_AROUND = no(), NO
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
     }
   }, { rootMargin: '0px 0px -60px 0px', threshold: 0.05 });
-  document.querySelectorAll('.tour, .tip, .around-card, .station, .reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('.tour, .tip, .around-card, .station, .gl-pair, .reveal').forEach(el => io.observe(el));
   // Safety net: if anything goes wrong, nothing stays invisible.
-  setTimeout(() => document.querySelectorAll('.tour, .tip, .around-card, .station, .reveal').forEach(el => el.classList.add('in')), 2000);
+  setTimeout(() => document.querySelectorAll('.tour, .tip, .around-card, .station, .gl-pair, .reveal').forEach(el => el.classList.add('in')), 2000);
 
   const cd = document.getElementById('cd');
   if (cd) {

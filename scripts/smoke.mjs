@@ -48,7 +48,8 @@ const CHECKS = [
   ['.venue', 1, 'venue blocks'],
   ['.station', 3, 'station cards'],
   ['.around-card', 6, 'getting-around cards'],
-  ['.tip', 9, 'fan tips'],
+  ['.tip', 12, 'fan tips'],
+  ['.gl-pair', 24, 'glossary pairs'],
   ['.more .btn', 1, 'Coming Soon CTA'],
   ['footer .row > div', 4, 'footer columns'],
 ];

@@ -1,11 +1,74 @@
 [
-  { "id": "tipping", "icon": "💵", "title": "Tipping is different here", "body": "Restaurants: 10% is generous, and a \"discretionary service charge\" is often already on the bill — check before you add more. Pubs: no tip, ever, for drinks at the bar. Taxis: round up. Nobody here is living on tips, so nobody is offended." },
-  { "icon": "🍺", "id": "pubs", "title": "Pub etiquette", "body": "Order at the bar, not the table — no one is coming to take your order. There is no queue but the bar staff know exactly who is next. Rounds are a real institution: if someone buys you one, you are buying the next. Last orders is rung about 15 minutes before closing." },
-  { "id": "jetlag", "icon": "✈️", "title": "Beat the jet lag", "body": "London is 5 hours ahead of the East Coast, 8 ahead of the West. You will land in the morning feeling fine and hit a wall at 3pm. Don't nap. Get outside, do something on your feet — a walking tour on day one is the single best cure — and go to bed at a normal local hour." },
-  { "id": "weather", "icon": "🧥", "title": "Pack layers, not an umbrella", "body": "September and October in London are mild and unreliable — 15°C, sunny, then not. A light waterproof jacket beats an umbrella in wind. Stadium seats are open to the sky. Nobody here cancels anything because of rain, and neither should you." },
-  { "id": "phone", "icon": "📶", "title": "Sort your phone before you fly", "body": "An eSIM bought before you land is far cheaper than switching on international roaming, and it works the moment you turn your phone on. Wi-Fi is free across the Underground. Plugs are Type G — the big three-pin ones — so bring an adapter or buy one at the airport." },
-  { "id": "queue", "icon": "🚶", "title": "Queue like a local", "body": "The queue is genuinely sacred. Do not cut it, do not crowd it, do not stand ambiguously near it. On escalators, stand on the right and let people walk past on the left. Get these two right and you will pass for a local more than your accent will give you away." },
-  { "id": "booking", "icon": "⏰", "title": "Book ahead", "body": "London's best experiences sell out fast on game weekends, when tens of thousands of visiting fans want the same things on the same two days. Book your tours the moment your flights are confirmed — not when you land." },
-  { "id": "american-roots", "icon": "🇺🇸", "title": "Americans in London", "body": "Benjamin Franklin lived here for sixteen years. John Adams too. The arguments that became the Declaration of Independence were had in these streets first — our Founding Fathers tour walks you through the whole story on America's 250th anniversary." },
-  { "id": "photos", "icon": "📸", "title": "Photo hotspots", "body": "Tower Bridge at dusk. Parliament from the middle of Westminster Bridge. The view down from Greenwich Hill. The free glass walkway at One New Change looking straight at St Paul's. All free, all extraordinary, all quieter early in the morning." }
+  {
+    "id": "tipping",
+    "icon": "💵",
+    "title": "Tipping is different here",
+    "body": "Restaurants: 10% is generous, and a \"discretionary service charge\" is often already on the bill — check before you add more. Pubs: no tip, ever, for drinks at the bar. Taxis: round up. Nobody here is living on tips, so nobody is offended."
+  },
+  {
+    "icon": "🍺",
+    "id": "pubs",
+    "title": "Pub etiquette",
+    "body": "Order at the bar, not the table — no one is coming to take your order. There is no queue but the bar staff know exactly who is next. Rounds are a real institution: if someone buys you one, you are buying the next. Last orders is rung about 15 minutes before closing."
+  },
+  {
+    "id": "jetlag",
+    "icon": "✈️",
+    "title": "Beat the jet lag",
+    "body": "London is 5 hours ahead of the East Coast, 8 ahead of the West. You will land in the morning feeling fine and hit a wall at 3pm. Don't nap. Get outside, do something on your feet — a walking tour on day one is the single best cure — and go to bed at a normal local hour."
+  },
+  {
+    "id": "weather",
+    "icon": "🧥",
+    "title": "Pack layers, not an umbrella",
+    "body": "September and October in London are mild and unreliable — 15°C, sunny, then not. A light waterproof jacket beats an umbrella in wind. Stadium seats are open to the sky. Nobody here cancels anything because of rain, and neither should you."
+  },
+  {
+    "id": "phone",
+    "icon": "📶",
+    "title": "Sort your phone before you fly",
+    "body": "An eSIM bought before you land is far cheaper than switching on international roaming, and it works the moment you turn your phone on. Wi-Fi is free across the Underground. Plugs are Type G — the big three-pin ones — so bring an adapter or buy one at the airport."
+  },
+  {
+    "id": "queue",
+    "icon": "🚶",
+    "title": "Queue like a local",
+    "body": "The queue is genuinely sacred. Do not cut it, do not crowd it, do not stand ambiguously near it. On escalators, stand on the right and let people walk past on the left. Get these two right and you will pass for a local more than your accent will give you away."
+  },
+  {
+    "id": "booking",
+    "icon": "⏰",
+    "title": "Book ahead",
+    "body": "London's best experiences sell out fast on game weekends, when tens of thousands of visiting fans want the same things on the same two days. Book your tours the moment your flights are confirmed — not when you land."
+  },
+  {
+    "id": "american-roots",
+    "icon": "🇺🇸",
+    "title": "Americans in London",
+    "body": "Benjamin Franklin lived here for sixteen years. John Adams too. The arguments that became the Declaration of Independence were had in these streets first — our Founding Fathers tour walks you through the whole story on America's 250th anniversary."
+  },
+  {
+    "id": "photos",
+    "icon": "📸",
+    "title": "Photo hotspots",
+    "body": "Tower Bridge at dusk. Parliament from the middle of Westminster Bridge. The view down from Greenwich Hill. The free glass walkway at One New Change looking straight at St Paul's. All free, all extraordinary, all quieter early in the morning."
+  },
+  {
+    "id": "pints",
+    "icon": "🍻",
+    "title": "A pint is a proper pint",
+    "body": "A UK pint is 20 fluid ounces — a fifth more beer than you are used to. Order a \"half\" if you want the American size. Spirits are poured to a measured 25ml or 50ml, not free-poured, so a gin and tonic here is smaller and stronger than the one at home."
+  },
+  {
+    "id": "emergency",
+    "icon": "🚑",
+    "title": "999, not 911",
+    "body": "Emergencies are <strong>999</strong> (or 112). For something that needs attention but isn't an emergency, dial <strong>111</strong> — it's free and staffed 24 hours. A pharmacy is a <em>chemist</em>, an ER is <em>A&amp;E</em>, and Boots is on every high street for anything minor."
+  },
+  {
+    "id": "sundays",
+    "icon": "🗓️",
+    "title": "Sundays run short",
+    "body": "Large shops can only open six hours on a Sunday — usually 11 to 5 — and pubs and restaurants often close earlier too. Bank holiday Mondays are the same. Plan your big shopping or your last-day browse for a Saturday and you'll avoid a locked door."
+  }
 ]

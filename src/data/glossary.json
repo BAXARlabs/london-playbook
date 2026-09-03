@@ -1,0 +1,29 @@
+{
+  "intro": "Same language, different vocabulary. Most of these are harmless. The flagged ones will actually get you a look.",
+  "pairs": [
+    { "us": "Pants", "uk": "Trousers", "note": "Say \"pants\" here and you have said underwear.", "flag": true },
+    { "us": "Fanny pack", "uk": "Bum bag", "note": "Do not use the American word. It is genuinely crude in Britain.", "flag": true },
+    { "us": "First floor", "uk": "Ground floor", "note": "Our first floor is your second. Hotel rooms and lifts both catch people out.", "flag": true },
+    { "us": "Subway", "uk": "The Tube", "note": "A \"subway\" here is a pedestrian tunnel under a road.", "flag": true },
+    { "us": "Entrée", "uk": "Main course", "note": "Order an entrée expecting a starter and a whole dinner arrives.", "flag": true },
+    { "us": "Pissed", "uk": "Drunk", "note": "Angry is \"pissed off\". The difference matters.", "flag": true },
+    { "us": "Soccer", "uk": "Football" },
+    { "us": "Football", "uk": "American football" },
+    { "us": "Line", "uk": "Queue" },
+    { "us": "Trash / garbage", "uk": "Rubbish — in the bin" },
+    { "us": "Restroom / bathroom", "uk": "Toilet, or the loo" },
+    { "us": "Fries", "uk": "Chips" },
+    { "us": "Chips", "uk": "Crisps" },
+    { "us": "Cookie", "uk": "Biscuit" },
+    { "us": "Check, please", "uk": "Can I get the bill" },
+    { "us": "Takeout", "uk": "Takeaway" },
+    { "us": "Elevator", "uk": "Lift" },
+    { "us": "Sidewalk", "uk": "Pavement" },
+    { "us": "Apartment", "uk": "Flat" },
+    { "us": "Sneakers", "uk": "Trainers" },
+    { "us": "Sweater", "uk": "Jumper" },
+    { "us": "Cell phone", "uk": "Mobile" },
+    { "us": "Gas", "uk": "Petrol" },
+    { "us": "Vacation", "uk": "Holiday" }
+  ]
+}
