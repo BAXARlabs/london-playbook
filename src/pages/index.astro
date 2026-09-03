@@ -28,6 +28,7 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_AROUND = no(), N_TIPS
 <section class={`red-canvas hero-section${heroImg ? ' has-photo' : ''}`} style={heroImg ? `--hero-img:url(${heroImg})` : undefined}>
   <HeroBg />
   <div class="hero wrap">
+   <div class="hero-plate">
     <div class="eyebrow small-caps">{skin.hero.eyebrow}</div>
     <h1 class="wordmark" set:html={skin.brand.wordmarkTop}></h1>
     <span class="ofline" set:html={skin.brand.wordmarkBottom}></span>
@@ -37,6 +38,7 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_AROUND = no(), N_TIPS
       <a class="btn on-red" href="#lineup">{skin.hero.ctaPrimary}</a>
       <a class="btn on-red-outline" href="#gameday">{skin.hero.ctaSecondary}</a>
     </div>
+   </div>
   </div>
 </section>
 

@@ -739,3 +739,34 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
     linear-gradient(180deg,rgba(11,17,38,.58) 0%,rgba(11,17,38,.16) 22%,rgba(122,9,24,.34) 68%,rgba(122,9,24,.76) 100%),
     linear-gradient(0deg,rgba(200,16,46,.64),rgba(200,16,46,.64))}
 }
+
+/* ══════════════ HERO: BRIGHT PHOTO, TEXT ON ITS OWN GROUND ══════════════
+   Darkening the whole photo to make white text legible is what made it murky.
+   Instead the photo runs bright and the copy sits on its own plate — a card
+   clipped to the field. Contrast is carried by the plate, so the wash is free
+   to be light. */
+.hero-section.has-photo::before{background-position:center 74%;filter:saturate(.72) contrast(1.04)}
+.hero-section.has-photo::after{
+  background:
+    linear-gradient(180deg,rgba(11,17,38,.42) 0%,rgba(11,17,38,.04) 24%,rgba(122,9,24,.10) 68%,rgba(122,9,24,.44) 100%),
+    linear-gradient(0deg,rgba(200,16,46,.30),rgba(200,16,46,.30))}
+.hero-section.has-photo .hero-bg{opacity:.30}
+
+.hero-section.has-photo .hero{padding:64px 0 76px}
+.hero-section.has-photo .hero-plate{
+  background:rgba(11,17,38,.78);
+  border:1px solid rgba(255,255,255,.22);
+  box-shadow:0 18px 60px rgba(11,17,38,.42);
+  padding:44px 46px 46px;max-width:920px;margin:0 auto;position:relative}
+/* hash ticks along the top and bottom edge of the plate */
+.hero-section.has-photo .hero-plate::before,
+.hero-section.has-photo .hero-plate::after{content:"";position:absolute;left:0;right:0;height:7px;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.34) 0 2px,transparent 2px 24px)}
+.hero-section.has-photo .hero-plate::before{top:8px}
+.hero-section.has-photo .hero-plate::after{bottom:8px}
+.hero-section.has-photo .wordmark{text-shadow:0 3px 0 var(--red-shadow)}
+.hero-section.has-photo .tagline{color:rgba(255,255,255,.97)}
+@media (max-width:860px){
+  .hero-section.has-photo .hero-plate{padding:32px 20px 34px}
+  .hero-section.has-photo .hero{padding:44px 0 52px}
+}
