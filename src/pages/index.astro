@@ -19,7 +19,7 @@ const cats = [...new Map(tours.map(t => [t.cat, t.catLabel])).entries()];
     <p class="tagline" set:html={skin.hero.tagline}></p>
     <div class="ctas">
       <a class="btn on-red" href="#lineup">{skin.hero.ctaPrimary}</a>
-      <a class="btn on-red-outline" href={skin.event.enabled ? '#gameday' : '#more'}>{skin.hero.ctaSecondary}</a>
+      <a class="btn on-red-outline" href="#gameday">{skin.hero.ctaSecondary}</a>
     </div>
   </div>
 </section>
@@ -39,7 +39,6 @@ const cats = [...new Map(tours.map(t => [t.cat, t.catLabel])).entries()];
   </div>
 </section>
 
-{skin.event.enabled && (
 <section class="red-canvas" id="gameday">
   <div class="gameday wrap">
     <div class="section-no">01 · Game Day</div>
@@ -54,7 +53,6 @@ const cats = [...new Map(tours.map(t => [t.cat, t.catLabel])).entries()];
     </div>
   </div>
 </section>
-)}
 
 <section class="lineup tft-watermark" id="lineup">
   <div class="wrap">

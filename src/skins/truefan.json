@@ -41,7 +41,6 @@
     "ctaSecondary": "Game Day Countdown"
   },
   "event": {
-    "enabled": true,
     "label": "Time Until Kickoff",
     "matchup": "Philadelphia Eagles<br>vs Jacksonville Jaguars",
     "where": "Tottenham Hotspur Stadium · NFL London 2026",

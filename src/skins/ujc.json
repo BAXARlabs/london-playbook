@@ -29,7 +29,6 @@
     "ctaSecondary": "Game Day Countdown"
   },
   "event": {
-    "enabled": true,
     "label": "Time Until Kickoff",
     "matchup": "Kansas Jayhawks<br>vs Arizona State Sun Devils",
     "where": "Wembley Stadium · Union Jack Classic 2026",

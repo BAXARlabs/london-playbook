@@ -23,7 +23,11 @@
   "partners": {
     "label": "An",
     "items": [
-      { "img": "assets/images/aileron-vip.png", "alt": "Aileron VIP", "cls": "logo-img-pa" }
+      {
+        "img": "assets/images/aileron-vip.png",
+        "alt": "Aileron VIP",
+        "cls": "logo-img-pa"
+      }
     ],
     "suffix": "product"
   },
@@ -35,13 +39,35 @@
     "ctaSecondary": "Plan Your Trip"
   },
   "scoreboard": [
-    { "n": 12, "label": "Curated Tours", "sub": "Browse all" },
-    { "n": 4, "pad": 2, "label": "American Football Games in London", "sub": "UJC + NFL" },
-    { "n": 1983, "comma": true, "label": "Years of History", "sub": "Founded 43 AD" },
-    { "star": true, "label": "Stories to Tell", "sub": "9 million stories" }
+    {
+      "n": 12,
+      "label": "Curated Tours",
+      "sub": "Browse all"
+    },
+    {
+      "n": 4,
+      "pad": 2,
+      "label": "American Football Games in London",
+      "sub": "UJC + NFL"
+    },
+    {
+      "n": 1983,
+      "comma": true,
+      "label": "Years of History",
+      "sub": "Founded 43 AD"
+    },
+    {
+      "star": true,
+      "label": "Stories to Tell",
+      "sub": "9 million stories"
+    }
   ],
   "event": {
-    "enabled": false
+    "label": "Time Until Kickoff",
+    "matchup": "American Football<br>Returns to London",
+    "where": "Wembley Stadium · 19 September 2026",
+    "kickoff": "2026-09-19T17:00:00+01:00",
+    "kickoffConfirmed": true
   },
   "tours": {
     "exclude": [],

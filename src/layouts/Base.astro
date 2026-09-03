@@ -45,7 +45,7 @@ const tokens = Object.entries(skin.tokens || {}).map(([k, v]) => `${k}:${v}`).jo
       <span class="city" set:html={skin.brand.navCity}></span>
     </a>
     <div class="links">
-      {skin.event.enabled && <a href={base + '/#gameday'}>Game Day</a>}
+      <a href={base + '/#gameday'}>Game Day</a>
       <a href={base + '/#lineup'}>The Lineup</a>
       <a href={base + '/#intel'}>Insider Intel</a>
       <a href={base + '/#more'}>Coming Soon</a>
@@ -73,7 +73,7 @@ const tokens = Object.entries(skin.tokens || {}).map(([k, v]) => `${k}:${v}`).jo
       <div>
         <h5>The Playbook</h5>
         <ul>
-          {skin.event.enabled && <li><a href={base + '/#gameday'}>Game Day Countdown</a></li>}
+          <li><a href={base + '/#gameday'}>Game Day Countdown</a></li>
           <li><a href={base + '/#lineup'}>All 12 Tours</a></li>
           <li><a href={base + '/#intel'}>Insider Intel</a></li>
           <li><a href={base + '/#more'}>More Coming Soon</a></li>
