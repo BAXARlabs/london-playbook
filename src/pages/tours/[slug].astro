@@ -33,7 +33,7 @@ const ld = {
   <div class="hero wrap">
     <div class="eyebrow small-caps">Tour {tour.n} · {tour.catLabel}</div>
     <h1 class="display">{tour.title}</h1>
-    <div class="subtag">⏱ {tour.dur} · {tour.transport}</div>
+    <div class="subtag">⏱ {tour.dur} · {tour.transport}{tour.price ? ` · from £${tour.price}` : ''}</div>
     <p class="tagline">{tour.short}</p>
     <div class="ctas">
       <a class="btn on-red" href={tour.bookingUrl || skin.enquiryUrl || `${base}/#more`}>Book This Tour ↗</a>

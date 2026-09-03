@@ -773,3 +773,84 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 /* plate lightened from .78 to .58 — 11.5:1 was far more contrast than the
    4.5 floor needs, and the surplus was just making the hero murky */
 @media (max-width:860px){.hero-section.has-photo .hero-plate{background:rgba(11,17,38,.62)}}
+
+/* ══════════════ BUNDLES ══════════════
+   Four Skyline options share three inclusions, so the core is stated once and
+   the options differ only by what they add and cost. Repeating the same three
+   lines four times is what makes a pricing block unreadable. */
+.packages{padding:88px 0 96px;background:var(--white)}
+.packages .section-no{display:inline-block;border:1px solid var(--red);color:var(--red);padding:5px 11px;
+  letter-spacing:.24em;font-size:11.5px;margin-bottom:20px;font-family:'Oswald',sans-serif;font-style:italic;font-weight:700}
+.packages h2.display{font-size:clamp(38px,5.4vw,76px);transform:skew(-8deg);color:var(--ink);
+  text-shadow:0 5px 0 var(--gray-200);line-height:.95;margin-bottom:12px}
+.packages .section-sub{font-size:16px;line-height:1.7;color:var(--gray-700);max-width:60ch;margin-bottom:44px;
+  font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0}
+
+.pack{border:2px solid var(--navy);margin-bottom:26px;background:var(--white)}
+.pack-head{background:var(--navy);color:#fff;padding:20px 24px}
+.pack-head h3{font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,2.6vw,28px);letter-spacing:.02em;margin-bottom:3px}
+.pack-head p{font-size:13.5px;color:rgba(255,255,255,.76);line-height:1.5}
+
+.pack-core{padding:20px 24px;border-bottom:1px dashed var(--line-on-light);background:var(--gray-50)}
+.pc-label{display:block;font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;
+  letter-spacing:.2em;font-size:10.5px;color:var(--red);margin-bottom:10px}
+.pack-core ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:6px 26px}
+.pack-core li{position:relative;padding-left:22px;font-size:14.5px;line-height:1.6;color:var(--ink)}
+.pack-core li::before{content:"✕";position:absolute;left:0;top:1px;color:var(--red);
+  font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;font-size:12px}
+
+.pack-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.opt{display:flex;flex-direction:column;gap:4px;padding:22px 20px 20px;text-decoration:none;color:inherit;
+  border-right:1px solid var(--line-on-light);transition:background .18s ease,transform .18s ease}
+.opt:last-child{border-right:none}
+.opt:hover{background:var(--gray-50)}
+.opt-name{font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;
+  font-size:16px;letter-spacing:.03em;color:var(--ink)}
+.opt-adds{font-size:12.5px;color:var(--gray-700);line-height:1.45;min-height:1.45em}
+.opt-price{font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;font-size:34px;line-height:1.05;
+  color:var(--red);margin-top:8px;font-variant-numeric:tabular-nums}
+.opt-cta{font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;
+  letter-spacing:.16em;font-size:11px;color:var(--navy);margin-top:8px}
+.opt:hover .opt-cta{color:var(--red)}
+
+.pack-note{padding:16px 24px 20px;font-size:13.5px;line-height:1.6;color:var(--gray-700);
+  border-top:1px solid var(--line-on-light);background:var(--gray-50)}
+.pack-small{font-size:12.5px;line-height:1.6;color:var(--gray-700);max-width:70ch;margin-top:8px}
+
+.js-anim .opt{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease,background .18s ease}
+.js-anim .opt.in{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){.js-anim .opt{opacity:1;transform:none;transition:none}}
+
+@media (max-width:860px){
+  .packages{padding:60px 0 68px}
+  .pack-opts{grid-template-columns:1fr}
+  .opt{border-right:none;border-bottom:1px solid var(--line-on-light)}
+  .opt:last-child{border-bottom:none}
+}
+/* tour price — only rendered when the data carries one */
+.tour-price{margin-top:12px;padding-top:11px;border-top:1px solid var(--line-on-light);
+  font-family:'Oswald',sans-serif;font-style:italic;font-weight:600;text-transform:uppercase;
+  letter-spacing:.14em;font-size:11.5px;color:var(--gray-700)}
+.tour-price strong{font-weight:700;font-size:19px;color:var(--red);letter-spacing:.02em}
+
+/* ══════════════ LOCAL KNOWLEDGE ══════════════ */
+.lk-list{display:grid;gap:16px}
+.lk{border:1px solid var(--line-on-light);border-left:4px solid var(--red);background:var(--white);padding:22px 24px 20px}
+.lk-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+.lk-head h4{font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;
+  font-size:20px;letter-spacing:.02em;color:var(--ink)}
+.lk-where{font-family:'Oswald',sans-serif;font-style:italic;font-weight:600;text-transform:uppercase;
+  letter-spacing:.14em;font-size:10.5px;color:var(--gray-700)}
+.lk-hook{font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;
+  letter-spacing:.06em;font-size:13px;color:var(--red);margin-bottom:10px}
+.lk-body{font-size:14.5px;line-height:1.7;color:var(--gray-700);max-width:78ch}
+.lk-body strong{color:var(--ink)}
+.lk-do{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line-on-light);font-size:13.5px;
+  line-height:1.55;color:var(--ink)}
+.lk-do span{display:inline-block;font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;
+  text-transform:uppercase;letter-spacing:.18em;font-size:10px;color:var(--red);margin-right:10px}
+.js-anim .lk{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.js-anim .lk.in{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){.js-anim .lk{opacity:1;transform:none;transition:none}}
+@media (max-width:860px){.lk{padding:18px 16px 16px}}

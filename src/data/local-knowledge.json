@@ -1,0 +1,50 @@
+{
+  "intro": "Not the guidebook list. Five places where something actually happened, and what to do when you get there.",
+  "items": [
+    {
+      "id": "mayflower",
+      "place": "The Mayflower",
+      "where": "Rotherhithe · Overground to Rotherhithe",
+      "hook": "The ship sailed from this exact spot",
+      "body": "The <em>Mayflower</em> left from the mooring outside this pub in July 1620, and some of the ship's original timbers are built into the structure. It is the <strong>only pub in the UK licensed to sell US postage stamps</strong> — and if you can show you're descended from a Pilgrim, they'll have you sign the Descendants' Book.",
+      "doThis": "Get a table on the back terrace over the water. Check the tide.",
+      "source": "https://www.historyhit.com/locations/the-mayflower/"
+    },
+    {
+      "id": "dukes",
+      "place": "Dukes Bar",
+      "where": "St James's · Green Park",
+      "hook": "Where Bond's martini was decided",
+      "body": "Ian Fleming drank here, and it was at this bar that he settled on a vodka martini as Bond's drink — shaken, not stirred. The martinis are made at your table from a trolley and are famously strong: the bar enforces a <strong>strict two-drink limit</strong>. Ask for a third and you'll be politely refused.",
+      "doThis": "Two. That is the whole plan. Eat first.",
+      "source": "https://en.wikipedia.org/wiki/Dukes_Hotel"
+    },
+    {
+      "id": "grapes",
+      "place": "The Grapes",
+      "where": "Limehouse · DLR to Westferry",
+      "hook": "Ian McKellen's riverside pub, and Dickens wrote about it",
+      "body": "There has been a pub on this site since <strong>1583</strong>; the present building dates from the 1720s. Dickens put it in <em>Our Mutual Friend</em> as \"a tavern of dropsical appearance.\" It is now co-owned by <strong>Sir Ian McKellen</strong>, and there's an Antony Gormley statue standing out in the Thames behind it, installed by McKellen in 2013.",
+      "doThis": "Squeeze onto the tiny back veranda over the water at low tide and look for the statue.",
+      "source": "https://en.wikipedia.org/wiki/The_Grapes,_Limehouse"
+    },
+    {
+      "id": "denmark",
+      "place": "Denmark Street",
+      "where": "Soho · Tottenham Court Road",
+      "hook": "Britain's Tin Pan Alley, one short street",
+      "body": "The Rolling Stones cut their first album at Regent Sound, No. 4, in 1964. Elton John and Bernie Taupin wrote at No. 20. Bowie put his first band together in the café at No. 9. The <strong>Sex Pistols lived above No. 6</strong> and rehearsed in the basement — Johnny Rotten's cartoon graffiti was found on the walls years later during an archaeological survey.",
+      "doThis": "Walk it end to end. It takes four minutes and eight buildings are listed.",
+      "source": "https://en.wikipedia.org/wiki/Denmark_Street"
+    },
+    {
+      "id": "french",
+      "place": "The French House",
+      "where": "Dean Street, Soho · Leicester Square",
+      "hook": "Halves only, and de Gaulle drank here",
+      "body": "De Gaulle's Appeal of 18 June — the speech that launched the Free French — is said to have been written in this pub. Dylan Thomas once left the manuscript of <em>Under Milk Wood</em> under his chair. It serves beer in <strong>half pints only</strong>, every day of the year except 1 April, when Suggs from Madness pours the first pint.",
+      "doThis": "Order a half without comment. Ordering a pint marks you instantly.",
+      "source": "https://en.wikipedia.org/wiki/The_French_House,_Soho"
+    }
+  ]
+}

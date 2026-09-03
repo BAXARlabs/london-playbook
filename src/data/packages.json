@@ -1,0 +1,78 @@
+{
+  "intro": "Buy the bundle and you skip four separate queues — and pay less than the parts.",
+  "groups": [
+    {
+      "id": "skyline",
+      "name": "The Skyline Tour",
+      "kicker": "Bus, boat and cable car — plus whichever landmarks you add",
+      "coreLabel": "Every Skyline ticket includes",
+      "core": [
+        "24-hour hop-on hop-off bus tour",
+        "Uber Boat return trip to North Greenwich",
+        "Cable car across the Thames, return"
+      ],
+      "options": [
+        {
+          "id": "p1",
+          "name": "Skyline Tour",
+          "adds": [],
+          "price": 69
+        },
+        {
+          "id": "p2",
+          "name": "+ London Eye",
+          "adds": [
+            "London Eye"
+          ],
+          "price": 111
+        },
+        {
+          "id": "p3",
+          "name": "+ Tower of London",
+          "adds": [
+            "Tower of London"
+          ],
+          "price": 111
+        },
+        {
+          "id": "p4",
+          "name": "+ Both",
+          "adds": [
+            "London Eye",
+            "Tower of London"
+          ],
+          "price": 148
+        }
+      ],
+      "note": "Either landmark adds £42. Both together add £79 — £5 less than adding them one at a time."
+    },
+    {
+      "id": "hoho",
+      "name": "Hop-On Hop-Off & River Cruise",
+      "kicker": "The classic pairing — pick how long you want it for",
+      "coreLabel": "Included at every length",
+      "core": [
+        "Hop-on hop-off bus tour",
+        "River cruise"
+      ],
+      "tiers": [
+        {
+          "id": "h24",
+          "name": "24 hours",
+          "price": 46
+        },
+        {
+          "id": "h48",
+          "name": "48 hours",
+          "price": 56
+        },
+        {
+          "id": "h72",
+          "name": "72 hours",
+          "price": 61
+        }
+      ],
+      "note": "The second day costs £10 and the third £5. If you are here for a long weekend, 72 hours is the one."
+    }
+  ]
+}

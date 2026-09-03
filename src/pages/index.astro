@@ -8,6 +8,8 @@ import venuesData from '../data/venues.json';
 import transport from '../data/transport.json';
 import tipsData from '../data/tips.json';
 import glossary from '../data/glossary.json';
+import packages from '../data/packages.json';
+import local from '../data/local-knowledge.json';
 
 const base = (skin.site.basePath || '').replace(/\/$/, '');
 const ex = new Set(skin.tours?.exclude || []);
@@ -22,7 +24,7 @@ const bandImg = skin.media?.band ? `${base}/${skin.media.band}` : null;
 const enquiry = skin.enquiryUrl || 'mailto:hello@aileronvip.com?subject=London%20Playbook%20enquiry';
 
 let n = 0; const no = () => String(++n).padStart(2, '0');
-const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_AROUND = no(), N_TIPS = no(), N_WORDS = no();
+const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_PACKS = no(), N_AROUND = no(), N_LOCAL = no(), N_TIPS = no(), N_WORDS = no();
 ---
 <Base>
 <section class={`red-canvas hero-section${heroImg ? ' has-photo' : ''}`} style={heroImg ? `--hero-img:url(${heroImg})` : undefined}>
@@ -120,11 +122,46 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_AROUND = no(), N_TIPS
             <h3>{t.title}</h3>
             <p class="desc">{t.short}</p>
             <div class="meta"><span class="dur">⏱ {t.dur}</span><span class="transport">{t.transport}</span></div>
+            {t.price && <div class="tour-price">From <strong>£{t.price}</strong></div>}
           </div>
           <div class="footer-bar"><span>View Tour</span><span>↗</span></div>
         </a>
       ))}
     </div>
+  </div>
+</section>
+
+<div class="hash-rule"></div>
+<section class="packages" id="packages">
+  <div class="wrap">
+    <div class="section-no">{N_PACKS} · Bundles</div>
+    <h2 class="display">One Ticket, Several Things</h2>
+    <div class="section-sub">{packages.intro}</div>
+
+    {packages.groups.map(g => (
+      <div class="pack">
+        <div class="pack-head">
+          <h3>{g.name}</h3>
+          <p>{g.kicker}</p>
+        </div>
+        <div class="pack-core">
+          <span class="pc-label">{g.coreLabel}</span>
+          <ul>{g.core.map(c => <li>{c}</li>)}</ul>
+        </div>
+        <div class="pack-opts">
+          {(g.options || g.tiers).map(o => (
+            <a class="opt" href={enquiry}>
+              <span class="opt-name">{o.name}</span>
+              {o.adds && o.adds.length > 0 && <span class="opt-adds">{o.adds.join(' · ')}</span>}
+              <span class="opt-price">£{o.price}</span>
+              <span class="opt-cta">Enquire ↗</span>
+            </a>
+          ))}
+        </div>
+        {g.note && <p class="pack-note">{g.note}</p>}
+      </div>
+    ))}
+    <p class="pack-small">Prices are as quoted by the operator and can change. We will confirm the exact total, and what it covers, before anything is booked.</p>
   </div>
 </section>
 
@@ -148,6 +185,23 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_AROUND = no(), N_TIPS
           <p set:html={c.body}></p>
           <div class="around-detail">{c.detail}</div>
         </div>
+      ))}
+    </div>
+  </Fold>
+
+  <Fold no={N_LOCAL} sit="Trick Play" title="Local Knowledge" id="local" meta={`${local.items.length} places`}>
+    <p class="fold-intro">{local.intro}</p>
+    <div class="lk-list">
+      {local.items.map(i => (
+        <article class="lk">
+          <div class="lk-head">
+            <h4>{i.place}</h4>
+            <span class="lk-where">{i.where}</span>
+          </div>
+          <p class="lk-hook">{i.hook}</p>
+          <p class="lk-body" set:html={i.body}></p>
+          <p class="lk-do"><span>Do this</span>{i.doThis}</p>
+        </article>
       ))}
     </div>
   </Fold>
@@ -192,7 +246,7 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_AROUND = no(), N_TIPS
   const io = new IntersectionObserver((entries) => {
     for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
   }, { rootMargin: '0px 0px -60px 0px', threshold: 0.05 });
-  const ANIM = '.tour, .tip, .around-card, .station, .gl-pair, .reveal';
+  const ANIM = '.tour, .tip, .around-card, .station, .gl-pair, .opt, .lk, .reveal';
   document.querySelectorAll(ANIM).forEach(el => io.observe(el));
   setTimeout(() => document.querySelectorAll(ANIM).forEach(el => el.classList.add('in')), 2000);
 

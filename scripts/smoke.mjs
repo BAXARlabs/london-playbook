@@ -48,7 +48,9 @@ const ALWAYS = [
   ['.scoreboard .stat', 4, 'scoreboard stats'],
   ['.tour', 12, 'tour cards'],
   ['.filter', 2, 'tour filters'],
-  ['.fold-head', 4, 'fold headers'],
+  ['.fold-head', 5, 'fold headers'],
+  ['.pack', 2, 'bundle blocks'],
+  ['.opt', 7, 'bundle options'],
   ['.endzone .btn', 2, 'endzone CTAs'],
   ['footer .row > div', 4, 'footer columns'],
 ];
@@ -57,6 +59,7 @@ const FOLDED = [
   ['.venue', 1, 'venue blocks'],
   ['.station', 3, 'station cards'],
   ['.around-card', 6, 'getting-around cards'],
+  ['.lk', 5, 'local knowledge'],
   ['.tip', 12, 'fan tips'],
   ['.gl-pair', 24, 'glossary pairs'],
 ];
