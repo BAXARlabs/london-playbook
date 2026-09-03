@@ -720,3 +720,22 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 .hero-section.has-photo .eyebrow{margin-bottom:26px}
 /* a long wordmark (The College Fan) must never run off the edge */
 .hero .wordmark{max-width:100%;overflow-wrap:break-word}
+
+/* ---- let the photograph actually read ----
+   The flat red was at 80% and, cropped to a narrow viewport, the skyline
+   disappeared completely. Lighter wash, anchored low so the buildings survive
+   the crop, with a stronger scrim behind the text block so contrast does not
+   depend on which part of the photo lands there. */
+.hero-section.has-photo::before{background-position:center 78%}
+.hero-section.has-photo::after{
+  background:
+    radial-gradient(ellipse 74% 60% at 50% 56%,rgba(122,9,24,.82) 0%,rgba(122,9,24,.38) 62%,transparent 100%),
+    linear-gradient(180deg,rgba(11,17,38,.58) 0%,rgba(11,17,38,.10) 24%,rgba(122,9,24,.26) 70%,rgba(122,9,24,.72) 100%),
+    linear-gradient(0deg,rgba(200,16,46,.60),rgba(200,16,46,.60))}
+@media (max-width:860px){
+  .hero-section.has-photo::before{background-position:center 82%}
+  .hero-section.has-photo::after{background:
+    radial-gradient(ellipse 96% 52% at 50% 52%,rgba(122,9,24,.80) 0%,rgba(122,9,24,.42) 62%,transparent 100%),
+    linear-gradient(180deg,rgba(11,17,38,.58) 0%,rgba(11,17,38,.16) 22%,rgba(122,9,24,.34) 68%,rgba(122,9,24,.76) 100%),
+    linear-gradient(0deg,rgba(200,16,46,.64),rgba(200,16,46,.64))}
+}
