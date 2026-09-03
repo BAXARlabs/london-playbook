@@ -35,32 +35,51 @@ await page.waitForTimeout(1500);
 
 const countVisible = (sel) => page.$$eval(sel, els => els.filter(e => {
   const s = getComputedStyle(e), r = e.getBoundingClientRect();
+  // A <summary> stays visible when its <details> is closed; everything else in there does not.
+  if (!e.closest('summary') && e.closest('details:not([open])')) return false;
   return s.opacity !== '0' && s.visibility !== 'hidden' && s.display !== 'none' && r.width > 0 && r.height > 0;
 }).length);
 
 // [selector, minimum that must be VISIBLE, label]
-const CHECKS = [
+// Always on screen — a visitor must see these without clicking anything.
+const ALWAYS = [
   ['.hero h1, .hero .wordmark', 1, 'hero wordmark'],
   ['#gameday .countdown', 1, 'Game Day countdown'],
   ['.scoreboard .stat', 4, 'scoreboard stats'],
   ['.tour', 12, 'tour cards'],
   ['.filter', 2, 'tour filters'],
+  ['.fold-head', 4, 'fold headers'],
+  ['.endzone .btn', 2, 'endzone CTAs'],
+  ['footer .row > div', 4, 'footer columns'],
+];
+// Behind a fold — must be visible once opened, and hidden while closed.
+const FOLDED = [
   ['.venue', 1, 'venue blocks'],
   ['.station', 3, 'station cards'],
   ['.around-card', 6, 'getting-around cards'],
   ['.tip', 12, 'fan tips'],
   ['.gl-pair', 24, 'glossary pairs'],
-  ['.more .btn', 1, 'Coming Soon CTA'],
-  ['footer .row > div', 4, 'footer columns'],
 ];
 
 let failed = 0;
-for (const [sel, min, label] of CHECKS) {
-  const n = await countVisible(sel);
-  const ok = n >= min;
-  if (!ok) failed++;
-  console.log(`${ok ? 'PASS' : 'FAIL'}  ${String(n).padStart(3)} / ${min} visible  ${label}`);
-}
+const check = (n, min, label, note='') => {
+  const ok = n >= min; if (!ok) failed++;
+  console.log(`${ok ? 'PASS' : 'FAIL'}  ${String(n).padStart(3)} / ${min} visible  ${label}${note}`);
+};
+for (const [sel, min, label] of ALWAYS) check(await countVisible(sel), min, label);
+
+// closed folds must actually hide their contents
+const leaked = [];
+for (const [sel, , label] of FOLDED) if (await countVisible(sel) > 0) leaked.push(label);
+check(leaked.length === 0 ? 1 : 0, 1, 'folds hide contents when closed',
+      leaked.length ? `  — leaking: ${leaked.join(', ')}` : '');
+
+await page.$$eval('details.fold', ds => ds.forEach(d => { d.open = true; }));
+await page.evaluate(async () => {
+  for (let y = 0; y < document.body.scrollHeight; y += 400) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 30)); }
+});
+await page.waitForTimeout(1200);
+for (const [sel, min, label] of FOLDED) check(await countVisible(sel), min, label, '  (fold open)');
 
 await browser.close();
 srv.close();

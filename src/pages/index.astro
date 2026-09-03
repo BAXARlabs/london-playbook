@@ -1,12 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
-import skin from '../skin.js';
 import HeroBg from '../components/HeroBg.astro';
+import Fold from '../components/Fold.astro';
+import skin from '../skin.js';
 import toursData from '../data/tours.json';
 import venuesData from '../data/venues.json';
 import transport from '../data/transport.json';
 import tipsData from '../data/tips.json';
 import glossary from '../data/glossary.json';
+
 const base = (skin.site.basePath || '').replace(/\/$/, '');
 const ex = new Set(skin.tours?.exclude || []);
 const tours = toursData.filter(t => !ex.has(t.n)).map(t => ({ ...t, ...(skin.tours?.overrides?.[t.n] || {}) }));
@@ -14,10 +16,11 @@ const cats = [...new Map(tours.map(t => [t.cat, t.catLabel])).entries()];
 const venues = (skin.event.venues || []).map(k => venuesData[k]).filter(Boolean);
 const exTips = new Set(skin.tips?.exclude || []);
 const tips = tipsData.filter(t => !exTips.has(t.id));
-// Section numbers are computed, so adding or reordering a section never means
-// renumbering by hand.
+const stationCount = venues.reduce((a, v) => a + v.stations.length, 0);
+const enquiry = skin.enquiryUrl || 'mailto:hello@aileronvip.com?subject=London%20Playbook%20enquiry';
+
 let n = 0; const no = () => String(++n).padStart(2, '0');
-const NO_GAMEDAY = no(), NO_THERE = no(), NO_LINEUP = no(), NO_AROUND = no(), NO_INTEL = no();
+const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_AROUND = no(), N_TIPS = no(), N_WORDS = no();
 ---
 <Base>
 <section class="red-canvas hero-section">
@@ -35,26 +38,24 @@ const NO_GAMEDAY = no(), NO_THERE = no(), NO_LINEUP = no(), NO_AROUND = no(), NO
   </div>
 </section>
 
-<section class="scoreboard-section tft-watermark" id="scoreboard">
+<section class="scoreboard-section" id="scoreboard">
   <div class="wrap">
-    <div class="label">Pre-Snap Read · The Numbers · Pre-Snap Read</div>
     <div class="scoreboard">
       {skin.scoreboard.map(s => (
         <div class="stat">
           <div class="n" data-count={s.star ? undefined : s.n} data-pad={s.pad || 0} data-comma={s.comma ? 1 : undefined}>{s.star ? '★' : (s.pad ? '00' : '0')}</div>
           <div class="l">{s.label}</div>
-          <div class="sub">{s.sub}</div>
         </div>
       ))}
     </div>
   </div>
 </section>
 
-<section class="red-canvas" id="gameday">
+<section class="red-canvas gameday-section" id="gameday">
   <div class="gameday wrap">
-    <div class="section-no">{NO_GAMEDAY} · Game Day</div>
+    <div class="section-no">{N_GAMEDAY} · Game Day</div>
     <div class="label">{skin.event.label}</div>
-    <h3 set:html={skin.event.matchup}></h3>
+    <h2 set:html={skin.event.matchup}></h2>
     <div class="where">{skin.event.where}</div>
     <div class="countdown" id="cd" data-kickoff={skin.event.kickoff}>
       <div class="cd-cell"><div class="num" data-cd="d">000</div><div class="lbl">Days</div></div>
@@ -65,11 +66,9 @@ const NO_GAMEDAY = no(), NO_THERE = no(), NO_LINEUP = no(), NO_AROUND = no(), NO
   </div>
 </section>
 
-<section class="getting-there tft-watermark" id="getting-there">
-  <div class="wrap">
-    <div class="section-no">{NO_THERE} · Getting There</div>
-    <h2 class="display">How to Reach {venues.length === 1 ? 'the Ground' : 'the Grounds'}</h2>
-    <div class="section-sub">Every way in, ranked by how long you'll queue</div>
+<div class="folds wrap">
+  <Fold no={N_THERE} title="Getting There" id="getting-there"
+        meta={`${venues.length} ${venues.length === 1 ? 'stadium' : 'stadiums'} · ${stationCount} routes`}>
     {venues.map(v => (
       <div class="venue">
         <div class="venue-head">
@@ -80,10 +79,7 @@ const NO_GAMEDAY = no(), NO_THERE = no(), NO_LINEUP = no(), NO_AROUND = no(), NO
         <div class="stations">
           {v.stations.map(st => (
             <div class="station">
-              <div class="st-top">
-                <span class="st-name">{st.station}</span>
-                <span class="st-walk">{st.walk} walk</span>
-              </div>
+              <div class="st-top"><span class="st-name">{st.station}</span><span class="st-walk">{st.walk}</span></div>
               <div class="st-line">{st.line} · {st.from}</div>
               <p class="st-note">{st.note}</p>
             </div>
@@ -95,12 +91,12 @@ const NO_GAMEDAY = no(), NO_THERE = no(), NO_LINEUP = no(), NO_AROUND = no(), NO
         </div>
       </div>
     ))}
-  </div>
-</section>
+  </Fold>
+</div>
 
-<section class="lineup tft-watermark" id="lineup">
+<section class="lineup" id="lineup">
   <div class="wrap">
-    <div class="section-no">{NO_LINEUP} · The Starting Lineup</div>
+    <div class="section-no">{N_LINEUP} · The Starting Lineup</div>
     <h2 class="display">Your {tours.length} Tours of London</h2>
     <div class="section-sub">Pick a play. Run the city.</div>
     <div class="filters">
@@ -111,12 +107,11 @@ const NO_GAMEDAY = no(), NO_THERE = no(), NO_LINEUP = no(), NO_AROUND = no(), NO
       {tours.map(t => (
         <a class="tour" data-cat={t.cat} href={`${base}/tours/${t.slug}/`}>
           <div class="img">
-            <img src={t.img} alt={t.title} loading="lazy" />
+            <img src={t.img} alt={t.title} width="900" height="563" loading="lazy" />
             <div class="num-medallion">{t.n}</div>
             <div class="cat-pill">{t.catLabel}</div>
           </div>
           <div class="body">
-            <div class="tour-label">Tour {t.n}</div>
             <h3>{t.title}</h3>
             <p class="desc">{t.short}</p>
             <div class="meta"><span class="dur">⏱ {t.dur}</span><span class="transport">{t.transport}</span></div>
@@ -128,11 +123,9 @@ const NO_GAMEDAY = no(), NO_THERE = no(), NO_LINEUP = no(), NO_AROUND = no(), NO
   </div>
 </section>
 
-<section class="getting-around" id="getting-around">
-  <div class="wrap">
-    <div class="section-no">{NO_AROUND} · Getting Around</div>
-    <h2 class="display">Moving Around London</h2>
-    <div class="section-sub">{transport.intro}</div>
+<div class="folds wrap">
+  <Fold no={N_AROUND} title="Getting Around London" id="getting-around" meta={`${transport.cards.length} things to know`}>
+    <p class="fold-intro">{transport.intro}</p>
     <div class="around-grid">
       {transport.cards.map(c => (
         <div class="around-card">
@@ -143,76 +136,67 @@ const NO_GAMEDAY = no(), NO_THERE = no(), NO_LINEUP = no(), NO_AROUND = no(), NO
         </div>
       ))}
     </div>
-  </div>
-</section>
+  </Fold>
 
-<section class="red-canvas">
-  <div class="midband wrap">
-    <span class="small-caps">{skin.hero.eyebrow}</span>
-    <h2 class="display">London Is<br>Yours to Explore</h2>
-    <div class="ft">Expert Guides · Small Groups · Unforgettable Stories</div>
-  </div>
-</section>
-
-<section class="intel tft-watermark" id="intel">
-  <div class="wrap">
-    <div class="section-no">{NO_INTEL} · Insider Intel</div>
-    <h2 class="display">Fan Tips for London</h2>
-    <div class="section-sub">Quick plays from the locals' playbook</div>
+  <Fold no={N_TIPS} title="Fan Tips for London" id="intel" meta={`${tips.length} tips`}>
     <div class="intel-grid">
       {tips.map(t => (
         <div class="tip"><div class="icon">{t.icon}</div><h4>{t.title}</h4><p set:html={t.body}></p></div>
       ))}
     </div>
+  </Fold>
 
-    <div class="glossary">
-      <div class="gl-head">
-        <h3>Speak the Language</h3>
-        <p>{glossary.intro}</p>
-      </div>
-      <div class="gl-grid">
-        {glossary.pairs.map(p => (
-          <div class={`gl-pair${p.flag ? ' flagged' : ''}`}>
-            <div class="gl-row">
-              <span class="gl-us">{p.us}</span>
-              <span class="gl-arrow">→</span>
-              <span class="gl-uk">{p.uk}</span>
-            </div>
-            {p.note && <p class="gl-note">{p.note}</p>}
-          </div>
-        ))}
-      </div>
+  <Fold no={N_WORDS} title="Speak the Language" id="glossary" meta={`${glossary.pairs.length} words`}>
+    <p class="fold-intro">{glossary.intro}</p>
+    <div class="gl-grid">
+      {glossary.pairs.map(p => (
+        <div class={`gl-pair${p.flag ? ' flagged' : ''}`}>
+          <div class="gl-row"><span class="gl-us">{p.us}</span><span class="gl-arrow">→</span><span class="gl-uk">{p.uk}</span></div>
+          {p.note && <p class="gl-note">{p.note}</p>}
+        </div>
+      ))}
     </div>
-  </div>
-</section>
+  </Fold>
+</div>
 
-<section class="more tft-watermark" id="more">
+<section class="red-canvas endzone" id="endzone">
   <div class="wrap">
-    <span class="small-caps">More Coming Soon</span>
-    <h2 class="display">More Plays<br>in the Book</h2>
-    <p>Dining guides, cocktail bars, match-day pubs, and day trips from London — all dropping soon. Sign up and we'll keep you in the loop.</p>
-    <a class="btn primary" href={skin.enquiryUrl || '#more'}>Stay in the Loop ↗</a>
+    <span class="small-caps">Endzone</span>
+    <h2 class="display">Ready to Run<br>the Playbook?</h2>
+    <p>Tell us when you're in town and which game you're here for. We'll put the days around it together — tours, tables, transfers, the lot.</p>
+    <div class="ctas">
+      <a class="btn on-red" href={enquiry}>Plan My Trip ↗</a>
+      <a class="btn on-red-outline" href="#lineup">Browse the Tours</a>
+    </div>
   </div>
 </section>
 </Base>
 
 <script>
-  // Mark the document before paint so the hidden start-state applies only
-  // when this script is actually running.
   document.documentElement.classList.add('js-anim');
   const io = new IntersectionObserver((entries) => {
-    for (const e of entries) {
-      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-    }
+    for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
   }, { rootMargin: '0px 0px -60px 0px', threshold: 0.05 });
-  document.querySelectorAll('.tour, .tip, .around-card, .station, .gl-pair, .reveal').forEach(el => io.observe(el));
-  // Safety net: if anything goes wrong, nothing stays invisible.
-  setTimeout(() => document.querySelectorAll('.tour, .tip, .around-card, .station, .gl-pair, .reveal').forEach(el => el.classList.add('in')), 2000);
+  const ANIM = '.tour, .tip, .around-card, .station, .gl-pair, .reveal';
+  document.querySelectorAll(ANIM).forEach(el => io.observe(el));
+  setTimeout(() => document.querySelectorAll(ANIM).forEach(el => el.classList.add('in')), 2000);
+
+  // A fold opened after load has never been observed; reveal its contents at once.
+  document.querySelectorAll('details.fold').forEach(d => d.addEventListener('toggle', () => {
+    if (d.open) d.querySelectorAll(ANIM).forEach(el => el.classList.add('in'));
+  }));
+  // Deep link or in-page nav to a closed fold should open it.
+  const openTarget = () => {
+    const el = location.hash && document.querySelector(location.hash);
+    const d = el?.closest?.('details.fold') || (el?.tagName === 'DETAILS' ? el : null);
+    if (d) { d.open = true; d.querySelectorAll(ANIM).forEach(x => x.classList.add('in')); }
+  };
+  addEventListener('hashchange', openTarget); openTarget();
 
   const cd = document.getElementById('cd');
   if (cd) {
     const K = new Date(cd.dataset.kickoff).getTime();
-    const pad = (n, w) => String(n).padStart(w, '0');
+    const pad = (v, w) => String(v).padStart(w, '0');
     const set = (k, v) => { const e = cd.querySelector(`[data-cd="${k}"]`); if (e) e.textContent = v; };
     (function tick() {
       let s = Math.max(0, Math.floor((K - Date.now()) / 1000));

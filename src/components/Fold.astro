@@ -1,0 +1,14 @@
+---
+// Collapsible reference section. Native <details> so it is keyboard-operable,
+// findable by in-page search when open, and works with JS disabled.
+const { no, title, meta, id, open = false } = Astro.props;
+---
+<details class="fold" id={id} open={open}>
+  <summary class="fold-head">
+    <span class="fold-no">{no}</span>
+    <span class="fold-title">{title}</span>
+    <span class="fold-meta">{meta}</span>
+    <span class="fold-chev" aria-hidden="true"></span>
+  </summary>
+  <div class="fold-body"><slot /></div>
+</details>
