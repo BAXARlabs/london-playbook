@@ -34,7 +34,10 @@
     "where": "Wembley Stadium · Union Jack Classic 2026",
     "kickoff": "2026-09-19T17:00:00+01:00",
     "kickoffConfirmed": true,
-    "split": true
+    "split": true,
+    "venues": [
+      "wembley"
+    ]
   },
   "scoreboard": [
     {

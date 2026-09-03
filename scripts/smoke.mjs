@@ -45,7 +45,10 @@ const CHECKS = [
   ['.scoreboard .stat', 4, 'scoreboard stats'],
   ['.tour', 12, 'tour cards'],
   ['.filter', 2, 'tour filters'],
-  ['.tip', 6, 'fan tips'],
+  ['.venue', 1, 'venue blocks'],
+  ['.station', 3, 'station cards'],
+  ['.around-card', 6, 'getting-around cards'],
+  ['.tip', 9, 'fan tips'],
   ['.more .btn', 1, 'Coming Soon CTA'],
   ['footer .row > div', 4, 'footer columns'],
 ];

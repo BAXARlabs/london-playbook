@@ -458,3 +458,51 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 @media (prefers-reduced-motion:reduce){
   .js-anim .tour,.js-anim .tip,.js-anim .reveal{opacity:1;transform:none;transition:none}
 }
+
+/* ============== GETTING THERE ============== */
+.getting-there{padding:96px 0;background-color:var(--white)}
+.getting-there .section-no{font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;font-size:15px;letter-spacing:.32em;color:var(--red);text-align:center;margin-bottom:14px}
+.getting-there h2{font-size:clamp(40px,6vw,86px);transform:skew(-8deg);text-align:center;color:var(--ink);text-shadow:0 5px 0 var(--gray-200);margin-bottom:14px;line-height:.95}
+.getting-there .section-sub{text-align:center;font-family:'Oswald',sans-serif;font-style:italic;font-weight:500;text-transform:uppercase;letter-spacing:.22em;font-size:14px;margin-bottom:52px;color:var(--gray-700)}
+.venue{border:1px solid var(--line-on-light);border-top:5px solid var(--red);padding:34px 32px;margin-bottom:28px;background:var(--gray-50)}
+.venue-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.venue-head h3{font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;font-size:clamp(22px,3vw,32px);letter-spacing:.01em;color:var(--ink)}
+.venue-area{font-family:'Oswald',sans-serif;font-style:italic;font-weight:600;text-transform:uppercase;letter-spacing:.16em;font-size:12px;color:var(--red)}
+.venue-note{font-size:16px;line-height:1.7;color:var(--gray-700);margin-bottom:26px;max-width:70ch}
+.stations{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:26px}
+.station{background:var(--white);border:1px solid var(--line-on-light);border-left:3px solid var(--navy);padding:18px 18px 16px;transition:border-color .25s ease,transform .25s ease}
+.station:hover{border-left-color:var(--red);transform:translateY(-3px)}
+.st-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:4px}
+.st-name{font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;font-size:16px;letter-spacing:.02em;color:var(--ink)}
+.st-walk{font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:12px;color:var(--red);white-space:nowrap}
+.st-line{font-size:12px;color:var(--navy);font-weight:600;margin-bottom:8px}
+.st-note{font-size:13.5px;line-height:1.55;color:var(--gray-700)}
+.venue-foot{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;border-top:1px dashed var(--line-on-light);padding-top:20px}
+.vf-label{display:block;font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--red);margin-bottom:5px}
+.venue-foot p{font-size:14px;line-height:1.6;color:var(--gray-700)}
+
+/* ============== GETTING AROUND ============== */
+.getting-around{padding:96px 0;background-color:var(--gray-50)}
+.getting-around .section-no{font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;font-size:15px;letter-spacing:.32em;color:var(--red);text-align:center;margin-bottom:14px}
+.getting-around h2{font-size:clamp(40px,6vw,86px);transform:skew(-8deg);text-align:center;color:var(--ink);text-shadow:0 5px 0 var(--gray-200);margin-bottom:16px;line-height:.95}
+.getting-around .section-sub{text-align:center;font-size:16px;line-height:1.7;color:var(--gray-700);max-width:64ch;margin:0 auto 48px}
+.around-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+.around-card{background:var(--white);border:1px solid var(--line-on-light);padding:28px 26px;position:relative;display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.around-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--navy);transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
+.around-card:hover::before{transform:scaleX(1)}
+.around-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.06);border-color:var(--navy)}
+.around-card .icon{font-size:34px;line-height:1;margin-bottom:14px}
+.around-card h4{font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;font-size:20px;margin-bottom:10px;letter-spacing:.02em;color:var(--ink)}
+.around-card p{font-size:14.5px;line-height:1.65;color:var(--gray-700);flex:1}
+.around-card strong{color:var(--ink)}
+.around-detail{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line-on-light);font-family:'Oswald',sans-serif;font-style:italic;font-weight:600;text-transform:uppercase;letter-spacing:.08em;font-size:11.5px;color:var(--red);line-height:1.5}
+
+.js-anim .around-card,.js-anim .station{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.js-anim .around-card.in,.js-anim .station.in{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){.js-anim .around-card,.js-anim .station{opacity:1;transform:none;transition:none}}
+
+@media (max-width:860px){
+  .getting-there,.getting-around{padding:64px 0}
+  .venue{padding:26px 20px}
+  .stations,.venue-foot,.around-grid{gap:14px}
+}

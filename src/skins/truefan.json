@@ -45,7 +45,10 @@
     "matchup": "Philadelphia Eagles<br>vs Jacksonville Jaguars",
     "where": "Tottenham Hotspur Stadium · NFL London 2026",
     "kickoff": "2026-10-11T14:30:00+01:00",
-    "kickoffConfirmed": true
+    "kickoffConfirmed": true,
+    "venues": [
+      "tottenham"
+    ]
   },
   "watermark": "assets/images/truefan-watermark-tile.png"
 }

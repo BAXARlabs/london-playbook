@@ -1,0 +1,27 @@
+{
+  "wembley": {
+    "name": "Wembley Stadium",
+    "area": "Wembley Park, north-west London",
+    "note": "Come out of Wembley Park and you walk down Olympic Way with the arch in front of you the whole time. It is the walk everyone photographs. Arrive 90 minutes before kick-off and it is worth the extra time on its own.",
+    "stations": [
+      { "station": "Wembley Park", "line": "Metropolitan & Jubilee", "from": "12 min from Baker Street", "walk": "10 min", "note": "The classic approach, straight down Olympic Way. Also the busiest — expect queues on the way out." },
+      { "station": "Wembley Stadium", "line": "Chiltern Railways", "from": "9 min from Marylebone", "walk": "5 min", "note": "Closest to the ground and consistently the quietest. The locals' choice." },
+      { "station": "Wembley Central", "line": "Bakerloo & Overground", "from": "Direct from Euston", "walk": "15–20 min", "note": "Furthest walk, but the crowd thins out fastest here. Best bet for getting away afterwards." }
+    ],
+    "leaving": "The crush lasts 30–45 minutes after the whistle. Have a drink, let it clear, then walk out into a half-empty station.",
+    "driving": "Don't. Roads around the stadium close before and after, and stadium parking has to be booked weeks ahead through a third party."
+  },
+  "tottenham": {
+    "name": "Tottenham Hotspur Stadium",
+    "area": "Tottenham, north London",
+    "note": "Purpose-built for the NFL — there is a retractable pitch with an artificial surface underneath for American football. Get there early: the ground floor concourse has the longest bar in Europe.",
+    "stations": [
+      { "station": "White Hart Lane", "line": "London Overground", "from": "Direct from Liverpool Street", "walk": "5 min", "note": "About 500 steps from the platform to the ground. Board at Liverpool Street rather than changing at Seven Sisters." },
+      { "station": "Northumberland Park", "line": "Greater Anglia", "from": "Direct from Liverpool Street", "walk": "10 min", "note": "Roughly 1,000 steps. A good alternative when White Hart Lane is heaving." },
+      { "station": "Tottenham Hale", "line": "Victoria line", "from": "Victoria line north", "walk": "25 min", "note": "A proper walk — 2,500 steps. The Victoria line gets especially busy on gameday." },
+      { "station": "Seven Sisters", "line": "Victoria line", "from": "Victoria line north", "walk": "30 min", "note": "3,000 steps, and there is usually a pedestrian diversion out of the station when changing to the Overground. Avoid if you can." }
+    ],
+    "leaving": "Free shuttle buses run to Alexandra Palace and Wood Green from three hours before until two hours after — but they must be booked in advance.",
+    "driving": "There is no general parking at the stadium and the closest roads close around the match. Silver Street and Bruce Grove stations are actively discouraged by the club."
+  }
+}

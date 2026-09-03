@@ -67,7 +67,11 @@
     "matchup": "American Football<br>Returns to London",
     "where": "Wembley Stadium · 19 September 2026",
     "kickoff": "2026-09-19T17:00:00+01:00",
-    "kickoffConfirmed": true
+    "kickoffConfirmed": true,
+    "venues": [
+      "wembley",
+      "tottenham"
+    ]
   },
   "tours": {
     "exclude": [],

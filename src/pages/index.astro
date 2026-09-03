@@ -3,10 +3,20 @@ import Base from '../layouts/Base.astro';
 import skin from '../skin.js';
 import HeroBg from '../components/HeroBg.astro';
 import toursData from '../data/tours.json';
+import venuesData from '../data/venues.json';
+import transport from '../data/transport.json';
+import tipsData from '../data/tips.json';
 const base = (skin.site.basePath || '').replace(/\/$/, '');
 const ex = new Set(skin.tours?.exclude || []);
 const tours = toursData.filter(t => !ex.has(t.n)).map(t => ({ ...t, ...(skin.tours?.overrides?.[t.n] || {}) }));
 const cats = [...new Map(tours.map(t => [t.cat, t.catLabel])).entries()];
+const venues = (skin.event.venues || []).map(k => venuesData[k]).filter(Boolean);
+const exTips = new Set(skin.tips?.exclude || []);
+const tips = tipsData.filter(t => !exTips.has(t.id));
+// Section numbers are computed, so adding or reordering a section never means
+// renumbering by hand.
+let n = 0; const no = () => String(++n).padStart(2, '0');
+const NO_GAMEDAY = no(), NO_THERE = no(), NO_LINEUP = no(), NO_AROUND = no(), NO_INTEL = no();
 ---
 <Base>
 <section class="red-canvas hero-section">
@@ -41,7 +51,7 @@ const cats = [...new Map(tours.map(t => [t.cat, t.catLabel])).entries()];
 
 <section class="red-canvas" id="gameday">
   <div class="gameday wrap">
-    <div class="section-no">01 · Game Day</div>
+    <div class="section-no">{NO_GAMEDAY} · Game Day</div>
     <div class="label">{skin.event.label}</div>
     <h3 set:html={skin.event.matchup}></h3>
     <div class="where">{skin.event.where}</div>
@@ -54,9 +64,42 @@ const cats = [...new Map(tours.map(t => [t.cat, t.catLabel])).entries()];
   </div>
 </section>
 
+<section class="getting-there tft-watermark" id="getting-there">
+  <div class="wrap">
+    <div class="section-no">{NO_THERE} · Getting There</div>
+    <h2 class="display">How to Reach {venues.length === 1 ? 'the Ground' : 'the Grounds'}</h2>
+    <div class="section-sub">Every way in, ranked by how long you'll queue</div>
+    {venues.map(v => (
+      <div class="venue">
+        <div class="venue-head">
+          <h3>{v.name}</h3>
+          <span class="venue-area">{v.area}</span>
+        </div>
+        <p class="venue-note">{v.note}</p>
+        <div class="stations">
+          {v.stations.map(st => (
+            <div class="station">
+              <div class="st-top">
+                <span class="st-name">{st.station}</span>
+                <span class="st-walk">{st.walk} walk</span>
+              </div>
+              <div class="st-line">{st.line} · {st.from}</div>
+              <p class="st-note">{st.note}</p>
+            </div>
+          ))}
+        </div>
+        <div class="venue-foot">
+          <div><span class="vf-label">Getting out</span><p>{v.leaving}</p></div>
+          <div><span class="vf-label">Driving</span><p>{v.driving}</p></div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
 <section class="lineup tft-watermark" id="lineup">
   <div class="wrap">
-    <div class="section-no">02 · The Starting Lineup</div>
+    <div class="section-no">{NO_LINEUP} · The Starting Lineup</div>
     <h2 class="display">Your {tours.length} Tours of London</h2>
     <div class="section-sub">Pick a play. Run the city.</div>
     <div class="filters">
@@ -84,6 +127,24 @@ const cats = [...new Map(tours.map(t => [t.cat, t.catLabel])).entries()];
   </div>
 </section>
 
+<section class="getting-around" id="getting-around">
+  <div class="wrap">
+    <div class="section-no">{NO_AROUND} · Getting Around</div>
+    <h2 class="display">Moving Around London</h2>
+    <div class="section-sub">{transport.intro}</div>
+    <div class="around-grid">
+      {transport.cards.map(c => (
+        <div class="around-card">
+          <div class="icon">{c.icon}</div>
+          <h4>{c.title}</h4>
+          <p set:html={c.body}></p>
+          <div class="around-detail">{c.detail}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
 <section class="red-canvas">
   <div class="midband wrap">
     <span class="small-caps">{skin.hero.eyebrow}</span>
@@ -94,16 +155,13 @@ const cats = [...new Map(tours.map(t => [t.cat, t.catLabel])).entries()];
 
 <section class="intel tft-watermark" id="intel">
   <div class="wrap">
-    <div class="section-no">03 · Insider Intel</div>
+    <div class="section-no">{NO_INTEL} · Insider Intel</div>
     <h2 class="display">Fan Tips for London</h2>
     <div class="section-sub">Quick plays from the locals' playbook</div>
     <div class="intel-grid">
-      <div class="tip"><div class="icon">🚇</div><h4>Ride the Tube</h4><p>Tap your US contactless card — no Oyster needed. Avoid the Central line during rush hour. Mind the gap. It's literal.</p></div>
-      <div class="tip"><div class="icon">🍺</div><h4>Pub Etiquette</h4><p>Order at the bar, not the table. No tipping expected. Last orders bell rings 15 mins before closing. Don't miss a proper pint of bitter.</p></div>
-      <div class="tip"><div class="icon">🚕</div><h4>Black Cab Culture</h4><p>London cabbies pass "The Knowledge" — a 3-year exam. They're your best source of local intel. Always tip them, they've earned it.</p></div>
-      <div class="tip"><div class="icon">⏰</div><h4>Book Ahead</h4><p>London's best experiences sell out fast on game weekends. Book your tours the moment you land — you won't regret it.</p></div>
-      <div class="tip"><div class="icon">🇺🇸</div><h4>Americans in London</h4><p>Benjamin Franklin lived here. John Adams too. London shaped the very ideas of your nation — our Founding Fathers tour tells the whole story.</p></div>
-      <div class="tip"><div class="icon">📸</div><h4>Photo Hotspots</h4><p>Tower Bridge at dusk. Parliament from Westminster Bridge. Greenwich Hill view. The glass walkway at One New Change. All free. All extraordinary.</p></div>
+      {tips.map(t => (
+        <div class="tip"><div class="icon">{t.icon}</div><h4>{t.title}</h4><p set:html={t.body}></p></div>
+      ))}
     </div>
   </div>
 </section>
@@ -127,9 +185,9 @@ const cats = [...new Map(tours.map(t => [t.cat, t.catLabel])).entries()];
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
     }
   }, { rootMargin: '0px 0px -60px 0px', threshold: 0.05 });
-  document.querySelectorAll('.tour, .tip, .reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('.tour, .tip, .around-card, .station, .reveal').forEach(el => io.observe(el));
   // Safety net: if anything goes wrong, nothing stays invisible.
-  setTimeout(() => document.querySelectorAll('.tour, .tip, .reveal').forEach(el => el.classList.add('in')), 2000);
+  setTimeout(() => document.querySelectorAll('.tour, .tip, .around-card, .station, .reveal').forEach(el => el.classList.add('in')), 2000);
 
   const cd = document.getElementById('cd');
   if (cd) {

@@ -1,0 +1,41 @@
+{
+  "intro": "London is smaller than it looks and the transport is better than you have been told. Three things and you will move around like you live here.",
+  "cards": [
+    {
+      "icon": "💳",
+      "title": "Just tap your card",
+      "body": "No Oyster card, no ticket machine, no queue. Tap the same contactless card or phone you use at home on the yellow reader. <strong>Tube: tap in and tap out</strong> — miss the tap out and you are charged the maximum fare. <strong>Buses: tap on only.</strong> Everyone in your group needs their own card.",
+      "detail": "Zones 1–2 cap at £8.90 a day, zones 1–3 at £10.50 — once you hit it, the rest of the day is free."
+    },
+    {
+      "icon": "🏦",
+      "title": "Use a no-fee card",
+      "body": "Most US cards work fine, but many banks add a foreign transaction fee to <em>every single tap</em> — which turns a £2.80 tube ride into a line item you will regret. Travel cards without foreign fees are the fix. Load one into Apple Pay or Google Pay and tap with your phone.",
+      "detail": "Same card all day, every day — the daily cap only works if it recognises you."
+    },
+    {
+      "icon": "📱",
+      "title": "Download Citymapper",
+      "body": "This is the one. Built in London, for London — it knows which end of the platform to stand at, which carriage exits nearest your stairs, when a line is part-suspended, and it will tell you when walking is genuinely faster. Google Maps is fine. Citymapper is better here.",
+      "detail": "Free, iOS and Android. Set it up on the plane."
+    },
+    {
+      "icon": "🚕",
+      "title": "Black cab or Uber",
+      "body": "<strong>Uber</strong> works across London and is usually the cheaper of the two. <strong>Black cabs</strong> cost more but the drivers have passed The Knowledge — a three-year exam on every street in the city — and they take contactless. Orange light on means available; stick your arm out.",
+      "detail": "In central London at rush hour, the tube beats both. Every time."
+    },
+    {
+      "icon": "🚶",
+      "title": "Walk more than you think",
+      "body": "Central London is deceptively compact. Covent Garden to Leicester Square is 4 minutes on foot and two stops with a change on the tube. If Citymapper says the walk is under 15 minutes, walk it — you will see more of the city that way than from a tunnel.",
+      "detail": "Stand on the right on escalators. Walk on the left. This is not optional."
+    },
+    {
+      "icon": "🌙",
+      "title": "Getting back late",
+      "body": "The Night Tube runs Friday and Saturday nights on the Victoria, Central, Jubilee, Northern and Piccadilly lines. Night buses run every night and cost a fraction of a cab. Last regular tubes are around 00:30 — earlier than most Americans expect.",
+      "detail": "Match nights: check before you commit to a second round."
+    }
+  ]
+}
