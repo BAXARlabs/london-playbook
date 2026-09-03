@@ -66,8 +66,8 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_AROUND = no(), N_TIPS
   </div>
 </section>
 
-<div class="folds wrap">
-  <Fold no={N_THERE} title="Getting There" id="getting-there"
+<div class="folds wrap"><div class="sheet">
+  <Fold no={N_THERE} sit="1st & 10" title="Getting There" id="getting-there"
         meta={`${venues.length} ${venues.length === 1 ? 'stadium' : 'stadiums'} · ${stationCount} routes`}>
     {venues.map(v => (
       <div class="venue">
@@ -92,8 +92,9 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_AROUND = no(), N_TIPS
       </div>
     ))}
   </Fold>
-</div>
+</div></div></div>
 
+<div class="hash-rule"></div>
 <section class="lineup" id="lineup">
   <div class="wrap">
     <div class="section-no">{N_LINEUP} · The Starting Lineup</div>
@@ -123,8 +124,8 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_AROUND = no(), N_TIPS
   </div>
 </section>
 
-<div class="folds wrap">
-  <Fold no={N_AROUND} title="Getting Around London" id="getting-around" meta={`${transport.cards.length} things to know`}>
+<div class="folds wrap"><div class="sheet">
+  <Fold no={N_AROUND} sit="Open Field" title="Getting Around London" id="getting-around" meta={`${transport.cards.length} things to know`}>
     <p class="fold-intro">{transport.intro}</p>
     <div class="around-grid">
       {transport.cards.map(c => (
@@ -138,7 +139,7 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_AROUND = no(), N_TIPS
     </div>
   </Fold>
 
-  <Fold no={N_TIPS} title="Fan Tips for London" id="intel" meta={`${tips.length} tips`}>
+  <Fold no={N_TIPS} sit="Audible" title="Fan Tips for London" id="intel" meta={`${tips.length} tips`}>
     <div class="intel-grid">
       {tips.map(t => (
         <div class="tip"><div class="icon">{t.icon}</div><h4>{t.title}</h4><p set:html={t.body}></p></div>
@@ -146,7 +147,7 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_AROUND = no(), N_TIPS
     </div>
   </Fold>
 
-  <Fold no={N_WORDS} title="Speak the Language" id="glossary" meta={`${glossary.pairs.length} words`}>
+  <Fold no={N_WORDS} sit="Signals" title="Speak the Language" id="glossary" meta={`${glossary.pairs.length} words`}>
     <p class="fold-intro">{glossary.intro}</p>
     <div class="gl-grid">
       {glossary.pairs.map(p => (
@@ -157,8 +158,9 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_AROUND = no(), N_TIPS
       ))}
     </div>
   </Fold>
-</div>
+</div></div></div>
 
+<div class="hash-rule"></div>
 <section class="red-canvas endzone" id="endzone">
   <div class="wrap">
     <span class="small-caps">Endzone</span>
