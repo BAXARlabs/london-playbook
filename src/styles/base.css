@@ -856,95 +856,123 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 @media (max-width:860px){.lk{padding:18px 16px 16px}}
 
 
+
 /* ══════════════════════════════════════════════════════════════
    THE FIELD
-   Hero is one end zone, the Endzone CTA is the other. Everything between
-   is one field, always 100 yards however long the page becomes — marks are
-   positioned by percentage, never pixels.
+   Its own layer, sticky to the viewport and travelling slower than the
+   page, so the content flies over it. Always exactly 100 yards from the
+   hero end zone to the Endzone CTA, however long the page becomes.
    ══════════════════════════════════════════════════════════════ */
 .hash-rule{display:none}
-.field{position:relative}
-.rails{position:absolute;inset:0;pointer-events:none;z-index:2}
 
-/* hard against the page edge */
-.rail{position:absolute;top:0;bottom:0;width:96px}
+.field{position:relative;background:#1E6B34}
+.turf-stage{position:sticky;top:0;height:100vh;overflow:hidden;z-index:0;margin-bottom:-100vh}
+.turf-scroll{position:absolute;left:0;right:0;top:0;height:100vh;will-change:transform}
+
+/* turf: base green, mowing bands across the field, a little grain */
+.turf{position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(180deg,
+      rgba(255,255,255,.045) 0 62px,
+      rgba(0,0,0,.045) 62px 124px),
+    radial-gradient(120% 60% at 50% 0%, #2A7C41 0%, #1E6B34 55%, #185B2C 100%)}
+.turf::after{content:"";position:absolute;inset:0;opacity:.28;
+  background-image:radial-gradient(rgba(255,255,255,.16) 1px,transparent 1px);
+  background-size:4px 4px}
+
+/* the page content flies over the top */
+.field > .wrap,.field > section,.field > div:not(.turf-stage){position:relative;z-index:1}
+
+/* ---- sidelines and yard marks, hard against the page edge ---- */
+.rail{position:absolute;top:0;bottom:0;width:150px}
 .rail-l{left:0}
 .rail-r{right:0}
-.sideline{position:absolute;top:0;bottom:0;width:5px;background:rgba(15,27,60,.55)}
+.sideline{position:absolute;top:0;bottom:0;width:6px;background:rgba(255,255,255,.92)}
 .rail-l .sideline{left:0}
 .rail-r .sideline{right:0}
-
-/* yard marks grow inward from the sideline. one-yard ticks short,
-   five-yard longer, ten-yard longest — that is the one the number sits on. */
-.mk{position:absolute;height:3px;background:rgba(15,27,60,.42)}
-.mk-one{width:12px}
-.mk-five{width:30px}
-.mk-ten{width:58px;height:4px;background:rgba(15,27,60,.55)}
-.mk-goal{width:72px;height:6px;background:var(--red)}
+.mk{position:absolute;height:4px;background:rgba(255,255,255,.92)}
+.mk-one{width:14px}
+.mk-five{width:150px}
+.mk-ten{width:150px;height:5px}
+.mk-goal{width:150px;height:8px}
 .rail-l .mk{left:0}
 .rail-r .mk{right:0}
 
 /* ---- painted numerals ----
-   The ten-yard line runs BETWEEN the two digits, exactly as it is painted on
-   a real field. The digits turn to point in toward the middle of the field. */
+   Large, close together, split by the ten-yard line, turned to face inward. */
 .ynum{position:absolute;left:0;right:0;height:0;display:block}
-.ynum b{position:absolute;display:block;
+.ynum b{position:absolute;display:block;width:56px;text-align:center;
   font-family:'Oswald',sans-serif;font-weight:700;font-style:normal;
-  font-size:30px;line-height:1;color:rgba(15,27,60,.62);
+  font-size:56px;line-height:1;color:rgba(255,255,255,.94);
   transform-origin:center}
-.ynum .d1,.ynum .d2{width:34px;text-align:center}
+.rail-l .ynum b{left:34px;transform:rotate(90deg) scaleX(1.04)}
+.rail-l .ynum .d1{top:-58px}
+.rail-l .ynum .d2{top:6px}
+.rail-r .ynum b{right:34px;transform:rotate(-90deg) scaleX(1.04)}
+.rail-r .ynum .d1{top:6px}
+.rail-r .ynum .d2{top:-58px}
 
-/* LEFT rail: digits rotated so their tops face right, into the field */
-.rail-l .ynum b{left:20px;transform:rotate(90deg)}
-.rail-l .ynum .d1{top:-40px}
-.rail-l .ynum .d2{top:8px}
-/* RIGHT rail: mirrored, tops face left, into the field */
-.rail-r .ynum b{right:20px;transform:rotate(-90deg)}
-.rail-r .ynum .d1{top:8px}
-.rail-r .ynum .d2{top:-40px}
-
-/* the arrow that points at the nearer end zone; none on the 50 */
 .arw{position:absolute;width:0;height:0;
-  border-left:7px solid transparent;border-right:7px solid transparent}
-.rail-l .arw{left:27px}
-.rail-r .arw{right:27px}
-.arw.up{border-bottom:11px solid rgba(15,27,60,.62);top:-62px}
-.arw.down{border-top:11px solid rgba(15,27,60,.62);top:51px}
+  border-left:10px solid transparent;border-right:10px solid transparent}
+.rail-l .arw{left:48px}
+.rail-r .arw{right:48px}
+.arw.up{border-bottom:15px solid rgba(255,255,255,.94);top:-92px}
+.arw.down{border-top:15px solid rgba(255,255,255,.94);top:80px}
 
-/* end zones meet the field at a goal line */
-.hero-section{border-bottom:5px solid rgba(255,255,255,.9)}
-.endzone{border-top:5px solid rgba(255,255,255,.9)}
+/* ---- hash marks: two inboard rows, every yard ---- */
+.hash{position:absolute;top:0;bottom:0;width:0}
+.hash.hl{left:31%}
+.hash.hr{right:31%}
+.hm{position:absolute;left:-13px;width:26px;height:4px;background:rgba(255,255,255,.80)}
 
-/* coloured bands sit between the sidelines, not underneath them */
-@media (min-width:1400px){
-  .field .wrap{padding-left:118px;padding-right:118px}
-  .field .red-canvas,.field .scrapbook{margin-left:96px;margin-right:96px}
-  .field .scrapbook{border-left:2px solid var(--navy);border-right:2px solid var(--navy)}
+/* ---- end zones meet the field at a goal line ---- */
+.hero-section{border-bottom:7px solid rgba(255,255,255,.94)}
+.endzone{border-top:7px solid rgba(255,255,255,.94)}
+
+/* ---- the content column sits inboard of the sidelines so turf shows ----
+   Three tiers. The field is never switched off; on a phone it narrows to a
+   sliver and is pushed back so it reads as ground a long way below. */
+.field > section,.field > div:not(.turf-stage){margin-left:168px;margin-right:168px}
+.field .lineup,.field .packages{background-color:rgba(250,250,250,.98)}
+@media (min-width:1400px){ .field .wrap{max-width:1180px} }
+
+/* laptops — half-size markings, numerals still legible */
+@media (max-width:1399px){
+  .field > section,.field > div:not(.turf-stage){margin-left:96px;margin-right:96px}
+  .rail{width:88px}
+  .mk-five,.mk-ten,.mk-goal{width:88px}
+  .mk-one{width:10px}
+  .ynum b{font-size:32px;width:34px}
+  .rail-l .ynum b{left:18px}
+  .rail-r .ynum b{right:18px}
+  .rail-l .ynum .d1{top:-36px} .rail-l .ynum .d2{top:4px}
+  .rail-r .ynum .d1{top:4px}   .rail-r .ynum .d2{top:-36px}
+  .rail-l .arw{left:28px} .rail-r .arw{right:28px}
+  .arw{border-left-width:7px;border-right-width:7px}
+  .arw.up{border-bottom-width:11px;top:-56px}
+  .arw.down{border-top-width:11px;top:50px}
+  .hm{width:18px;left:-9px}
 }
-@media (max-width:1399px){ .rails{display:none} }
 
-/* ---- closer to the reference: heavier digits, tighter to the sideline,
-       and the ten-yard line runs past the number rather than stopping at it ---- */
-.mk-ten{width:96px}
-.ynum b{font-size:34px;color:rgba(15,27,60,.68);transform-origin:center}
-.ynum .d1,.ynum .d2{width:38px}
-.rail-l .ynum b{left:12px;transform:rotate(90deg) scaleX(1.06)}
-.rail-l .ynum .d1{top:-44px}
-.rail-l .ynum .d2{top:10px}
-.rail-r .ynum b{right:12px;transform:rotate(-90deg) scaleX(1.06)}
-.rail-r .ynum .d1{top:10px}
-.rail-r .ynum .d2{top:-44px}
-.rail-l .arw{left:21px}
-.rail-r .arw{right:21px}
-.arw.up{top:-68px;border-bottom-color:rgba(15,27,60,.68)}
-.arw.down{top:57px;border-top-color:rgba(15,27,60,.68)}
-.mk{background:rgba(15,27,60,.48)}
-.mk-ten{background:rgba(15,27,60,.62)}
-.sideline{background:rgba(15,27,60,.62)}
-
-/* The sideline padding was eating the content width and dropping the tour grid
-   from three columns to two. Widen the wrap inside the field by exactly the
-   padding added, so the content area is unchanged. */
-@media (min-width:1400px){
-  .field .wrap{max-width:1452px}   /* 1280 + 2 × 86 of added padding */
+/* tablets and phones — a strip of field either side, no room for numerals.
+   Darkened and desaturated so it recedes rather than competing. */
+@media (max-width:900px){
+  .field > section,.field > div:not(.turf-stage){margin-left:26px;margin-right:26px}
+  .rail{width:26px}
+  .sideline{width:3px}
+  .mk{height:2px}
+  .mk-one{width:6px}
+  .mk-five{width:14px}
+  .mk-ten,.mk-goal{width:26px;height:3px}
+  .ynum,.hash{display:none}
+  .turf{filter:saturate(.62) brightness(.72)}
+  .turf::after{opacity:.16}
+  .hero-section{border-bottom-width:4px}
+  .endzone{border-top-width:4px}
+}
+@media (max-width:420px){
+  .field > section,.field > div:not(.turf-stage){margin-left:16px;margin-right:16px}
+  .rail{width:16px}
+  .mk-five{width:9px}
+  .mk-ten,.mk-goal{width:16px}
 }
