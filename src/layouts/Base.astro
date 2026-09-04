@@ -26,17 +26,6 @@ const tokens = Object.entries(skin.tokens || {}).map(([k, v]) => `${k}:${v}`).jo
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
-<div class="band-stripe"></div>
-
-<div class="partner-bar">
-  <div class="wrap inner">
-    <span class="pl-label">{skin.partners.label}</span>
-    {skin.partners.items.map((p) => p.x
-      ? <span class="pl-x">×</span>
-      : <img class={`logo-img ${p.cls || ''}`} src={`${base}/${p.img}`} alt={p.alt} />)}
-    {skin.partners.suffix && <span class="pl-label">{skin.partners.suffix}</span>}
-  </div>
-</div>
 
 <nav class="top">
   <div class="wrap inner">

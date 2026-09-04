@@ -132,7 +132,7 @@
   .btn.on-red-outline:hover{background:var(--white);color:var(--red)}
 
   /* ===== HERO with play diagram bg (parallax) ===== */
-  .hero-section{position:relative;overflow:hidden;min-height:760px}
+  .hero-section{position:relative;overflow:hidden;min-height:880px}
   .hero-bg{
     position:absolute;left:-5%;right:-5%;top:-20%;bottom:-20%;pointer-events:none;
     display:flex;align-items:center;justify-content:center;
@@ -685,7 +685,7 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 .hero-section.has-photo{position:relative;isolation:isolate}
 /* the photo bleeds 14% past the section top and bottom and is translated by
    --hero-y, set from scroll, so it drifts slower than the page */
-.hero-section.has-photo::before{content:"";position:absolute;left:0;right:0;top:-12%;bottom:-12%;z-index:-2;
+.hero-section.has-photo::before{content:"";position:absolute;left:0;right:0;top:-22%;bottom:-22%;z-index:-2;
   background-image:var(--hero-img);background-size:cover;background-position:center 70%;
   filter:saturate(.55) contrast(1.06);
   transform:translate3d(0,var(--hero-y,0px),0);will-change:transform}
@@ -880,9 +880,20 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
    own height, so a mowing stripe is always exactly five yards. */
 .turf{position:absolute;inset:0;
   background:
+    /* ten-yard lines: the strongest paint, and the only thing that has to
+       read through a translucent section */
     repeating-linear-gradient(180deg,
-      rgba(255,255,255,.045) 0        calc(var(--yd,12.4px) * 5),
-      rgba(0,0,0,.045)       calc(var(--yd,12.4px) * 5) calc(var(--yd,12.4px) * 10)),
+      rgba(255,255,255,.85) 0 4px,
+      transparent 4px calc(var(--yd,12.4px) * 10)),
+    /* five-yard lines */
+    repeating-linear-gradient(180deg,
+      rgba(255,255,255,.45) 0 3px,
+      transparent 3px calc(var(--yd,12.4px) * 5)),
+    /* mowing stripes: light paint only, never a dark band, so a section
+       laid over them can only get lighter and text contrast can only improve */
+    repeating-linear-gradient(180deg,
+      rgba(255,255,255,.15) 0        calc(var(--yd,12.4px) * 5),
+      transparent           calc(var(--yd,12.4px) * 5) calc(var(--yd,12.4px) * 10)),
     radial-gradient(120% 60% at 50% 0%, #1B5288 0%, #123B63 55%, #0D2E4E 100%)}
 .turf::after{content:"";position:absolute;inset:0;opacity:.28;
   background-image:radial-gradient(rgba(255,255,255,.16) 1px,transparent 1px);
@@ -949,20 +960,20 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 .field .packages,
 .field .scoreboard-section{
   background-color:rgba(250,250,250,.64);
-  -webkit-backdrop-filter:blur(18px) saturate(118%);
-          backdrop-filter:blur(18px) saturate(118%)}
+  -webkit-backdrop-filter:blur(3px) saturate(110%);
+          backdrop-filter:blur(3px) saturate(110%)}
 .field .red-canvas{
   background-color:rgba(200,16,46,.74);
-  -webkit-backdrop-filter:blur(18px) saturate(118%);
-          backdrop-filter:blur(18px) saturate(118%)}
+  -webkit-backdrop-filter:blur(3px) saturate(110%);
+          backdrop-filter:blur(3px) saturate(110%)}
 .field .sheet{
   background-color:rgba(255,255,255,.70);
-  -webkit-backdrop-filter:blur(18px) saturate(118%);
-          backdrop-filter:blur(18px) saturate(118%)}
+  -webkit-backdrop-filter:blur(3px) saturate(110%);
+          backdrop-filter:blur(3px) saturate(110%)}
 .field .tour,.field .pack{
   background-color:rgba(255,255,255,.86);
-  -webkit-backdrop-filter:blur(10px);
-          backdrop-filter:blur(10px)}
+  -webkit-backdrop-filter:blur(4px);
+          backdrop-filter:blur(4px)}
 /* no backdrop-filter support: fall back to a near-solid plate */
 @supports not (backdrop-filter:blur(1px)){
   .field .lineup,.field .packages,.field .scoreboard-section{background-color:rgba(250,250,250,.95)}
