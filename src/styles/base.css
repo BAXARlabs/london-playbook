@@ -855,87 +855,96 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 @media (prefers-reduced-motion:reduce){.js-anim .lk{opacity:1;transform:none;transition:none}}
 @media (max-width:860px){.lk{padding:18px 16px 16px}}
 
+
 /* ══════════════════════════════════════════════════════════════
    THE FIELD
-   Hero is one end zone, the Endzone CTA is the other, and everything
-   between them is 100 yards — no matter how long the page becomes.
-   Marks are positioned by percentage, so the field stretches and the
-   numerals never distort.
+   Hero is one end zone, the Endzone CTA is the other. Everything between
+   is one field, always 100 yards however long the page becomes — marks are
+   positioned by percentage, never pixels.
    ══════════════════════════════════════════════════════════════ */
 .hash-rule{display:none}
-
 .field{position:relative}
 .rails{position:absolute;inset:0;pointer-events:none;z-index:2}
-.rail{position:absolute;top:0;bottom:0;width:62px}
+
+/* hard against the page edge */
+.rail{position:absolute;top:0;bottom:0;width:96px}
 .rail-l{left:0}
 .rail-r{right:0}
+.sideline{position:absolute;top:0;bottom:0;width:5px;background:rgba(15,27,60,.55)}
+.rail-l .sideline{left:0}
+.rail-r .sideline{right:0}
 
-/* the sideline itself */
-.sideline{position:absolute;top:0;bottom:0;width:3px;background:rgba(15,27,60,.30)}
-.rail-l .sideline{left:26px}
-.rail-r .sideline{right:26px}
+/* yard marks grow inward from the sideline. one-yard ticks short,
+   five-yard longer, ten-yard longest — that is the one the number sits on. */
+.mk{position:absolute;height:3px;background:rgba(15,27,60,.42)}
+.mk-one{width:12px}
+.mk-five{width:30px}
+.mk-ten{width:58px;height:4px;background:rgba(15,27,60,.55)}
+.mk-goal{width:72px;height:6px;background:var(--red)}
+.rail-l .mk{left:0}
+.rail-r .mk{right:0}
 
-/* yard marks. one-yard ticks are short, five-yard lines longer, goal lines solid */
-.mk{position:absolute;height:2px;background:rgba(15,27,60,.26)}
-.mk-one{width:9px}
-.mk-five{width:20px;height:2px;background:rgba(15,27,60,.40)}
-.mk-goal{width:34px;height:4px;background:var(--red)}
-.rail-l .mk{left:26px}
-.rail-r .mk{right:26px}
-
-/* painted yard numerals — condensed, wide-tracked, turned to face the sideline
-   exactly as they are painted on a real field */
-.ynum{position:absolute;display:flex;align-items:center;gap:5px;
+/* ---- painted numerals ----
+   The ten-yard line runs BETWEEN the two digits, exactly as it is painted on
+   a real field. The digits turn to point in toward the middle of the field. */
+.ynum{position:absolute;left:0;right:0;height:0;display:block}
+.ynum b{position:absolute;display:block;
   font-family:'Oswald',sans-serif;font-weight:700;font-style:normal;
-  font-size:19px;line-height:1;letter-spacing:.16em;color:rgba(15,27,60,.34);
-  white-space:nowrap;transform-origin:center}
-.ynum b{font-weight:700}
-.rail-l .ynum{left:-13px;transform:translateY(-50%) rotate(-90deg)}
-.rail-r .ynum{right:-13px;transform:translateY(-50%) rotate(90deg)}
-/* the directional arrow that points at the nearer end zone */
-.arw{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent}
-.arw.up{border-bottom:8px solid rgba(15,27,60,.34)}
-.arw.down{border-top:8px solid rgba(15,27,60,.34)}
+  font-size:30px;line-height:1;color:rgba(15,27,60,.62);
+  transform-origin:center}
+.ynum .d1,.ynum .d2{width:34px;text-align:center}
 
-/* on the red bands the paint flips to white so the field reads continuously */
-.field .red-canvas{position:relative;z-index:1}
-.field .gameday-section ~ *{}
+/* LEFT rail: digits rotated so their tops face right, into the field */
+.rail-l .ynum b{left:20px;transform:rotate(90deg)}
+.rail-l .ynum .d1{top:-40px}
+.rail-l .ynum .d2{top:8px}
+/* RIGHT rail: mirrored, tops face left, into the field */
+.rail-r .ynum b{right:20px;transform:rotate(-90deg)}
+.rail-r .ynum .d1{top:8px}
+.rail-r .ynum .d2{top:-40px}
 
-/* end zones: a goal line where the field meets each one */
+/* the arrow that points at the nearer end zone; none on the 50 */
+.arw{position:absolute;width:0;height:0;
+  border-left:7px solid transparent;border-right:7px solid transparent}
+.rail-l .arw{left:27px}
+.rail-r .arw{right:27px}
+.arw.up{border-bottom:11px solid rgba(15,27,60,.62);top:-62px}
+.arw.down{border-top:11px solid rgba(15,27,60,.62);top:51px}
+
+/* end zones meet the field at a goal line */
 .hero-section{border-bottom:5px solid rgba(255,255,255,.9)}
 .endzone{border-top:5px solid rgba(255,255,255,.9)}
 
-/* keep content clear of the sidelines on wide screens; below that the rails go */
-@media (min-width:1180px){ .field .wrap{padding-left:78px;padding-right:78px} }
-@media (max-width:1179px){ .rails{display:none} }
-
-/* ---- painted numerals, closer to the real thing ----
-   On a real field the two digits are painted as separate characters with a
-   clear gap, and the arrow sits tight against the number pointing at the
-   nearer goal line. */
-.rail{width:76px}
-.rail-l .sideline{left:34px}
-.rail-r .sideline{right:34px}
-.rail-l .mk{left:34px}
-.rail-r .mk{right:34px}
-.ynum{font-size:27px;letter-spacing:.26em;color:rgba(15,27,60,.42);gap:7px}
-.ynum b{font-variant-numeric:lining-nums tabular-nums}
-.rail-l .ynum{left:-16px}
-.rail-r .ynum{right:-16px}
-.arw{border-left-width:6px;border-right-width:6px}
-.arw.up{border-bottom-width:10px;border-bottom-color:rgba(15,27,60,.42)}
-.arw.down{border-top-width:10px;border-top-color:rgba(15,27,60,.42)}
-.mk-five{width:26px}
-.mk-one{width:11px}
-.mk-goal{width:42px}
-@media (min-width:1180px){ .field .wrap{padding-left:92px;padding-right:92px} }
-
-/* ---- inside the field, the coloured bands sit BETWEEN the sidelines ----
-   Running them full-bleed put navy paint on top of a red band where it could
-   not be read. Insetting them is also truer: the playing surface is bounded
-   by the sidelines, it does not run underneath them. */
-@media (min-width:1180px){
-  .field .red-canvas,
-  .field .scrapbook{margin-left:76px;margin-right:76px}
+/* coloured bands sit between the sidelines, not underneath them */
+@media (min-width:1400px){
+  .field .wrap{padding-left:118px;padding-right:118px}
+  .field .red-canvas,.field .scrapbook{margin-left:96px;margin-right:96px}
   .field .scrapbook{border-left:2px solid var(--navy);border-right:2px solid var(--navy)}
+}
+@media (max-width:1399px){ .rails{display:none} }
+
+/* ---- closer to the reference: heavier digits, tighter to the sideline,
+       and the ten-yard line runs past the number rather than stopping at it ---- */
+.mk-ten{width:96px}
+.ynum b{font-size:34px;color:rgba(15,27,60,.68);transform-origin:center}
+.ynum .d1,.ynum .d2{width:38px}
+.rail-l .ynum b{left:12px;transform:rotate(90deg) scaleX(1.06)}
+.rail-l .ynum .d1{top:-44px}
+.rail-l .ynum .d2{top:10px}
+.rail-r .ynum b{right:12px;transform:rotate(-90deg) scaleX(1.06)}
+.rail-r .ynum .d1{top:10px}
+.rail-r .ynum .d2{top:-44px}
+.rail-l .arw{left:21px}
+.rail-r .arw{right:21px}
+.arw.up{top:-68px;border-bottom-color:rgba(15,27,60,.68)}
+.arw.down{top:57px;border-top-color:rgba(15,27,60,.68)}
+.mk{background:rgba(15,27,60,.48)}
+.mk-ten{background:rgba(15,27,60,.62)}
+.sideline{background:rgba(15,27,60,.62)}
+
+/* The sideline padding was eating the content width and dropping the tour grid
+   from three columns to two. Widen the wrap inside the field by exactly the
+   padding added, so the content area is unchanged. */
+@media (min-width:1400px){
+  .field .wrap{max-width:1452px}   /* 1280 + 2 × 86 of added padding */
 }

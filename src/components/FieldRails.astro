@@ -1,19 +1,17 @@
 ---
-// The page between the two endzones is one football field. The rails run down
-// the left and right sidelines and are ALWAYS 100 yards, however long the page
-// gets — every mark is positioned as a percentage of the field, never in pixels.
-// Marks are placed in HTML rather than a stretched SVG so the painted numerals
-// never distort when the field gets taller.
+// Sidelines run down the two page edges. The field between the end zones is
+// always 100 yards however long the page gets, so every mark is placed as a
+// percentage — never in pixels. Numerals are HTML, not a stretched SVG, so
+// they never distort as the field grows.
 const marks = [];
 for (let y = 0; y <= 100; y++) {
-  const isFive = y % 5 === 0;
   const isTen = y % 10 === 0 && y !== 0 && y !== 100;
   marks.push({
     y,
-    kind: y === 0 || y === 100 ? 'goal' : isFive ? 'five' : 'one',
-    // Real fields count up to the 50 from each goal line and back down again.
-    num: isTen ? (y <= 50 ? y : 100 - y) : null,
-    // The directional arrow points at the nearer end zone; the 50 has none.
+    kind: y === 0 || y === 100 ? 'goal' : isTen ? 'ten' : y % 5 === 0 ? 'five' : 'one',
+    // counts up to the 50 from each goal line and back down
+    num: isTen ? String(y <= 50 ? y : 100 - y) : null,
+    // arrow points at the nearer end zone; the 50 never has one
     arrow: isTen && y !== 50 ? (y < 50 ? 'up' : 'down') : null,
   });
 }
@@ -22,14 +20,12 @@ for (let y = 0; y <= 100; y++) {
   {['l', 'r'].map(side => (
     <div class={`rail rail-${side}`}>
       <span class="sideline"></span>
-      {marks.map(m => (
-        <span class={`mk mk-${m.kind}`} style={`top:${m.y}%`}></span>
-      ))}
+      {marks.map(m => <span class={`mk mk-${m.kind}`} style={`top:${m.y}%`}></span>)}
       {marks.filter(m => m.num).map(m => (
         <span class="ynum" style={`top:${m.y}%`}>
-          {m.arrow === 'up' && <i class="arw up"></i>}
-          <b>{String(m.num).padStart(2, '0')}</b>
-          {m.arrow === 'down' && <i class="arw down"></i>}
+          <b class="d1">{m.num[0]}</b>
+          <b class="d2">{m.num[1]}</b>
+          {m.arrow && <i class={`arw ${m.arrow}`}></i>}
         </span>
       ))}
     </div>
