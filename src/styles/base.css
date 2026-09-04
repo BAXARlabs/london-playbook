@@ -1013,3 +1013,40 @@ footer{background-color:var(--navy)}
 .hash.hr{right:112px}
 @media (max-width:1399px){ .hash.hl{left:64px} .hash.hr{right:64px} }
 @media (max-width:900px){ .hash{display:none} }
+
+/* ══════════════ THE END ZONE ══════════════
+   Past the last ten-yard line the turf stops being field. Full-bleed so it
+   runs sideline to sideline, goal line across the top, end line at the foot,
+   and the payoff painted across it. */
+.field > section.touchdown{margin-left:0;margin-right:0}
+.touchdown{position:relative;z-index:1;overflow:hidden;
+  padding:82px 24px 86px;text-align:center;
+  border-top:9px solid rgba(255,255,255,.96);
+  border-bottom:6px solid rgba(255,255,255,.96);
+  background:
+    repeating-linear-gradient(180deg,rgba(255,255,255,.035) 0 54px,rgba(0,0,0,.05) 54px 108px),
+    linear-gradient(180deg,#0E3055 0%,#0A2542 100%)}
+/* the diagonal paint a lot of end zones carry */
+.touchdown::before{content:"";position:absolute;inset:0;opacity:.16;
+  background:repeating-linear-gradient(135deg,
+    rgba(255,255,255,.5) 0 3px,transparent 3px 26px)}
+.td-inner{position:relative;display:flex;align-items:baseline;justify-content:center;gap:.06em;flex-wrap:wrap}
+.td-word{font-family:'Oswald',sans-serif;font-weight:700;font-style:italic;text-transform:uppercase;
+  font-size:clamp(40px,8.4vw,124px);line-height:.92;letter-spacing:.14em;color:rgba(255,255,255,.97);
+  text-shadow:0 6px 0 var(--red-shadow),0 3px 26px rgba(0,0,0,.45)}
+.td-bangs{font-family:'Oswald',sans-serif;font-weight:700;font-style:italic;
+  font-size:clamp(40px,8.4vw,124px);line-height:.92;color:var(--red);
+  text-shadow:0 6px 0 rgba(0,0,0,.35)}
+/* pylons at the corners of the goal line */
+.pylon{position:absolute;top:-9px;width:15px;height:34px;background:var(--red);
+  box-shadow:0 2px 0 rgba(0,0,0,.35);z-index:2}
+.pylon.pl{left:0}
+.pylon.pr{right:0}
+@media (max-width:900px){
+  .touchdown{padding:52px 16px 56px;border-top-width:4px;border-bottom-width:4px}
+  .pylon{width:10px;height:22px;top:-4px}
+}
+/* it was overflowing and being clipped at the sides */
+.td-word,.td-bangs{font-size:clamp(30px,6.4vw,92px)}
+.td-word{letter-spacing:.10em}
+.td-inner{padding:0 8px}

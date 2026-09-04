@@ -51,6 +51,7 @@ const ALWAYS = [
   ['.fold-head', 5, 'fold headers'],
   ['.pack', 2, 'bundle blocks'],
   ['.opt', 7, 'bundle options'],
+  ['.touchdown .td-word', 1, 'touchdown band'],
   ['.endzone .btn', 2, 'endzone CTAs'],
   ['footer .row > div', 4, 'footer columns'],
 ];
