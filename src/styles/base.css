@@ -869,12 +869,14 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 .turf-stage{position:sticky;top:0;height:100vh;overflow:hidden;z-index:0;margin-bottom:-100vh}
 .turf-scroll{position:absolute;left:0;right:0;top:0;height:100vh;will-change:transform}
 
-/* turf: base green, mowing bands across the field, a little grain */
+/* turf: base green, mowing bands across the field, a little grain.
+   --yd is one yard in px, set by the parallax script from the field layer's
+   own height, so a mowing stripe is always exactly five yards. */
 .turf{position:absolute;inset:0;
   background:
     repeating-linear-gradient(180deg,
-      rgba(255,255,255,.045) 0 62px,
-      rgba(0,0,0,.045) 62px 124px),
+      rgba(255,255,255,.045) 0        calc(var(--yd,12.4px) * 5),
+      rgba(0,0,0,.045)       calc(var(--yd,12.4px) * 5) calc(var(--yd,12.4px) * 10)),
     radial-gradient(120% 60% at 50% 0%, #1B5288 0%, #123B63 55%, #0D2E4E 100%)}
 .turf::after{content:"";position:absolute;inset:0;opacity:.28;
   background-image:radial-gradient(rgba(255,255,255,.16) 1px,transparent 1px);
@@ -933,7 +935,30 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
    Three tiers. The field is never switched off; on a phone it narrows to a
    sliver and is pushed back so it reads as ground a long way below. */
 .field > section,.field > div:not(.turf-stage){margin-left:168px;margin-right:168px}
-.field .lineup,.field .packages{background-color:rgba(250,250,250,.98)}
+/* ---- frosted glass: the sections let the field through, blurred ----
+   backdrop-filter blurs whatever the section is sitting over, which is the
+   parallax field layer, so the turf and paint read as an out-of-focus
+   ground under frosted glass rather than a flat grey band. */
+.field .lineup,
+.field .packages,
+.field .scoreboard-section{
+  background-color:rgba(250,250,250,.80);
+  -webkit-backdrop-filter:blur(18px) saturate(118%);
+          backdrop-filter:blur(18px) saturate(118%)}
+.field .sheet{
+  background-color:rgba(255,255,255,.82);
+  -webkit-backdrop-filter:blur(18px) saturate(118%);
+          backdrop-filter:blur(18px) saturate(118%)}
+.field .tour,.field .pack{
+  background-color:rgba(255,255,255,.90);
+  -webkit-backdrop-filter:blur(10px);
+          backdrop-filter:blur(10px)}
+/* no backdrop-filter support: fall back to a near-solid plate */
+@supports not (backdrop-filter:blur(1px)){
+  .field .lineup,.field .packages,.field .scoreboard-section{background-color:rgba(250,250,250,.95)}
+  .field .sheet{background-color:rgba(255,255,255,.96)}
+  .field .tour,.field .pack{background-color:rgba(255,255,255,.97)}
+}
 @media (min-width:1400px){ .field .wrap{max-width:1180px} }
 
 /* laptops — half-size markings, numerals still legible */
@@ -1130,45 +1155,19 @@ footer{background-color:var(--navy)}
 
 /* ══════════════ MOBILE: ONE SIDELINE, LEFT ══════════════
    On a phone there is not enough width for two rails. The right rail is
-   dropped entirely and the content takes that space back. The left rail
-   stays and the section plate drops to 55% over exactly its width, so the
-   yard numbers read down one edge. The plate itself sits a little off
-   solid so a hint of field carries behind the tours. */
+   dropped and the content runs to the right edge. The left rail is left
+   uncovered — a 34px margin — so the yard numerals stay crisp rather than
+   being blurred by the section's own frost. */
 @media (max-width:900px){
-  .field > section,.field > div:not(.turf-stage){margin-left:0;margin-right:0}
+  .field > section,.field > div:not(.turf-stage){margin-left:34px;margin-right:0}
 
   /* right rail and both hash rows go — the left sideline is the whole motif */
   .rail-r{display:none}
   .hash{display:none}
 
-  .field .lineup,
-  .field .packages,
-  .field .scoreboard-section{
-    background-color:transparent;
-    background-image:linear-gradient(90deg,
-      rgba(250,250,250,.55) 0px,
-      rgba(250,250,250,.55) 34px,
-      rgba(250,250,250,.93) 46px,
-      rgba(250,250,250,.93) 100%)}
-
-  /* folds live inside .wrap, so they never cross the sideline — keep solid */
-  .field .sheet{background-color:#fff;background-image:none}
-
-  .field .red-canvas{
-    background-color:transparent;
-    background-image:linear-gradient(90deg,
-      rgba(200,16,46,.62) 0px,
-      rgba(200,16,46,.62) 34px,
-      rgba(200,16,46,.96) 46px,
-      rgba(200,16,46,.96) 100%)}
-
   /* the touchdown band stays solid — it is end zone, not field */
   .field .touchdown{background-color:#0A2542}
 
-  /* cards sit slightly off solid so the field carries behind the grid */
-  .field .tour,.field .pack{background-color:rgba(255,255,255,.94)}
-
-  /* copy starts past the left band; the right edge is content now */
-  .field .wrap{padding-left:46px;padding-right:16px}
+  .field .wrap{padding-left:16px;padding-right:16px}
   .field .tour-grid{gap:12px}
 }

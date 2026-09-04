@@ -63,6 +63,8 @@ for (let y = 0; y <= 100; y++) {
       range = Math.max(1, field.offsetHeight - vh);
       travel = range * RATE;
       scroll.style.height = `${vh + travel}px`;
+      // one yard, so the mowing stripes stay locked to five-yard bands
+      scroll.style.setProperty('--yd', `${(vh + travel) / 100}px`);
       place();
     };
     const place = () => {
