@@ -683,9 +683,15 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
    brand, and the chalk play diagram sits over both. Contrast for the hero text
    comes from the wash plus a vertical scrim, not from luck. */
 .hero-section.has-photo{position:relative;isolation:isolate}
-.hero-section.has-photo::before{content:"";position:absolute;inset:0;z-index:-2;
-  background-image:var(--hero-img);background-size:cover;background-position:center 62%;
-  filter:saturate(.55) contrast(1.06)}
+/* the photo bleeds 14% past the section top and bottom and is translated by
+   --hero-y, set from scroll, so it drifts slower than the page */
+.hero-section.has-photo::before{content:"";position:absolute;left:0;right:0;top:-12%;bottom:-12%;z-index:-2;
+  background-image:var(--hero-img);background-size:cover;background-position:center 70%;
+  filter:saturate(.55) contrast(1.06);
+  transform:translate3d(0,var(--hero-y,0px),0);will-change:transform}
+@media (prefers-reduced-motion:reduce){
+  .hero-section.has-photo::before{transform:none}
+}
 .hero-section.has-photo::after{content:"";position:absolute;inset:0;z-index:-1;
   background:
     linear-gradient(180deg,rgba(11,17,38,.52) 0%,rgba(11,17,38,.12) 26%,rgba(122,9,24,.30) 72%,rgba(122,9,24,.66) 100%),
@@ -790,7 +796,7 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 .pack-head{background:var(--navy);color:#fff;padding:20px 24px}
 .pack-head h3{font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;
   font-size:clamp(20px,2.6vw,28px);letter-spacing:.02em;margin-bottom:3px}
-.pack-head p{font-size:13.5px;color:rgba(255,255,255,.76);line-height:1.5}
+.pack-head p{font-size:13.5px;color:rgba(255,255,255,.70);line-height:1.5}
 
 .pack-core{padding:20px 24px;border-bottom:1px dashed var(--line-on-light);background:var(--gray-50)}
 .pc-label{display:block;font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;
@@ -903,23 +909,23 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 /* ---- painted numerals ----
    Large, close together, split by the ten-yard line, turned to face inward. */
 .ynum{position:absolute;left:0;right:0;height:0;display:block}
-.ynum b{position:absolute;display:block;width:56px;text-align:center;
+.ynum b{position:absolute;display:block;width:42px;text-align:center;
   font-family:'Oswald',sans-serif;font-weight:700;font-style:normal;
-  font-size:56px;line-height:1;color:rgba(255,255,255,.94);
+  font-size:42px;line-height:1;color:rgba(255,255,255,.94);
   transform-origin:center}
 .rail-l .ynum b{left:34px;transform:rotate(90deg) scaleX(1.04)}
-.rail-l .ynum .d1{top:-58px}
-.rail-l .ynum .d2{top:6px}
+.rail-l .ynum .d1{top:-44px}
+.rail-l .ynum .d2{top:2px}
 .rail-r .ynum b{right:34px;transform:rotate(-90deg) scaleX(1.04)}
-.rail-r .ynum .d1{top:6px}
-.rail-r .ynum .d2{top:-58px}
+.rail-r .ynum .d1{top:2px}
+.rail-r .ynum .d2{top:-44px}
 
 .arw{position:absolute;width:0;height:0;
   border-left:10px solid transparent;border-right:10px solid transparent}
-.rail-l .arw{left:48px}
-.rail-r .arw{right:48px}
-.arw.up{border-bottom:15px solid rgba(255,255,255,.94);top:-92px}
-.arw.down{border-top:15px solid rgba(255,255,255,.94);top:80px}
+.rail-l .arw{left:45px}
+.rail-r .arw{right:45px}
+.arw.up{border-bottom:13px solid rgba(255,255,255,.94);top:-70px}
+.arw.down{border-top:13px solid rgba(255,255,255,.94);top:57px}
 
 /* ---- hash marks: two inboard rows, every yard ---- */
 .hash{position:absolute;top:0;bottom:0;width:0}
@@ -942,20 +948,25 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 .field .lineup,
 .field .packages,
 .field .scoreboard-section{
-  background-color:rgba(250,250,250,.80);
+  background-color:rgba(250,250,250,.64);
+  -webkit-backdrop-filter:blur(18px) saturate(118%);
+          backdrop-filter:blur(18px) saturate(118%)}
+.field .red-canvas{
+  background-color:rgba(200,16,46,.74);
   -webkit-backdrop-filter:blur(18px) saturate(118%);
           backdrop-filter:blur(18px) saturate(118%)}
 .field .sheet{
-  background-color:rgba(255,255,255,.82);
+  background-color:rgba(255,255,255,.70);
   -webkit-backdrop-filter:blur(18px) saturate(118%);
           backdrop-filter:blur(18px) saturate(118%)}
 .field .tour,.field .pack{
-  background-color:rgba(255,255,255,.90);
+  background-color:rgba(255,255,255,.86);
   -webkit-backdrop-filter:blur(10px);
           backdrop-filter:blur(10px)}
 /* no backdrop-filter support: fall back to a near-solid plate */
 @supports not (backdrop-filter:blur(1px)){
   .field .lineup,.field .packages,.field .scoreboard-section{background-color:rgba(250,250,250,.95)}
+  .field .red-canvas{background-color:rgba(200,16,46,.96)}
   .field .sheet{background-color:rgba(255,255,255,.96)}
   .field .tour,.field .pack{background-color:rgba(255,255,255,.97)}
 }
@@ -967,15 +978,15 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
   .rail{width:88px}
   .mk-five,.mk-ten,.mk-goal{width:88px}
   .mk-one{width:10px}
-  .ynum b{font-size:32px;width:34px}
+  .ynum b{font-size:27px;width:27px}
   .rail-l .ynum b{left:18px}
   .rail-r .ynum b{right:18px}
-  .rail-l .ynum .d1{top:-36px} .rail-l .ynum .d2{top:4px}
-  .rail-r .ynum .d1{top:4px}   .rail-r .ynum .d2{top:-36px}
-  .rail-l .arw{left:28px} .rail-r .arw{right:28px}
+  .rail-l .ynum .d1{top:-29px} .rail-l .ynum .d2{top:2px}
+  .rail-r .ynum .d1{top:2px}   .rail-r .ynum .d2{top:-29px}
+  .rail-l .arw{left:24px} .rail-r .arw{right:24px}
   .arw{border-left-width:7px;border-right-width:7px}
-  .arw.up{border-bottom-width:11px;top:-56px}
-  .arw.down{border-top-width:11px;top:50px}
+  .arw.up{border-bottom-width:10px;top:-47px}
+  .arw.down{border-top-width:10px;top:38px}
   .hm{width:18px;left:-9px}
 }
 
@@ -1010,18 +1021,17 @@ footer{background-color:var(--navy)}
 /* ---- goal lines: full width across both end zones ---- */
 .endzone{border-top:9px solid rgba(255,255,255,.96)}
 
-/* ---- sections let a hint of field through, at every size ---- */
-@media all{
-  .field .lineup{background-color:rgba(250,250,250,.93)}
-  .field .packages{background-color:rgba(255,255,255,.93)}
-  .field .sheet{background-color:rgba(255,255,255,.94)}
-  .field .fold{background-color:transparent}
-  .field .fold-head:hover{background-color:rgba(250,250,250,.6)}
-  .field .scoreboard-section{background-color:rgba(255,255,255,.90)}
-  .field .red-canvas{background-color:rgba(200,16,46,.94)}
-  .field .tour{background-color:rgba(255,255,255,.97)}
-  .field .pack{background-color:rgba(255,255,255,.96)}
-}
+/* The plates themselves are set once, in the frosted-glass block above.
+   Only the fold rows are declared here — they ride on the sheet's own glass. */
+/* copy that sits straight on the glass is darkened a step: the plate is
+   translucent enough that gray-700 lands at 4.58:1, which is too thin a
+   margin to leave to a browser's blur rounding. */
+.field .lineup .section-sub,
+.field .packages .section-sub,
+.field .lineup .lk-list,
+.field .packages .pack-note{color:#33332F}
+.field .fold{background-color:transparent}
+.field .fold-head:hover{background-color:rgba(250,250,250,.5)}
 
 /* ---- goal line under the hero ----
    The hero's ::after is already the photo wash, so the pseudo-element version
