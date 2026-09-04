@@ -1087,3 +1087,43 @@ footer{background-color:var(--navy)}
   .rail-l .ynum .d1{top:-18px} .rail-l .ynum .d2{top:2px}
   .rail-r .ynum .d1{top:2px}   .rail-r .ynum .d2{top:-18px}
 }
+
+/* ══════════════ MOBILE TOUR GRID ══════════════
+   Twelve full cards ran to 6,500px of scroll on a phone. Two up, and the
+   card drops to what you actually need to choose one: picture, number,
+   title, length. The description and the footer bar go — the whole card is
+   already a link, so the bar was repeating what the card does. */
+@media (max-width:760px){
+  .tour-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .tour .img{aspect-ratio:4/3}
+  .tour .body{padding:12px 12px 10px}
+  .tour h3{font-size:14.5px;line-height:1.18;margin-bottom:8px;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .tour .desc{display:none}
+  .tour .footer-bar{display:none}
+  .tour .meta{padding-top:8px;flex-direction:column;align-items:flex-start;gap:3px}
+  .tour .meta::before{width:24px}
+  .tour .meta .dur{font-size:11px;letter-spacing:.1em}
+  .tour .meta .transport{font-size:11px;line-height:1.35}
+  .tour .num-medallion{min-width:32px;height:26px;font-size:14px;padding:0 6px;border-width:1.5px}
+  .tour .cat-pill{font-size:8.5px;padding:3px 5px;letter-spacing:.08em}
+  .tour-price{margin-top:8px;padding-top:8px;font-size:10px}
+  .tour-price strong{font-size:15px}
+  /* filters wrap into a tidy block rather than a long row */
+  .filters{gap:6px;margin-bottom:26px}
+  .filter{font-size:10.5px;padding:7px 9px}
+}
+
+/* the heading and the filter block were eating a screen before a single card */
+@media (max-width:760px){
+  .lineup h2.display{font-size:clamp(30px,8.2vw,44px);line-height:1}
+  .packages h2.display,.getting-there h2,.getting-around h2{font-size:clamp(28px,7.6vw,40px)}
+  .lineup .section-sub{font-size:12px;margin-bottom:22px}
+  .lineup{padding:44px 0 52px}
+  /* filters become one swipeable row instead of four stacked lines */
+  .filters{display:flex;flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    margin-left:-14px;margin-right:-14px;padding:0 14px 4px}
+  .filters::-webkit-scrollbar{display:none}
+  .filter{flex:0 0 auto;white-space:nowrap}
+}
