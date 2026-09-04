@@ -1,80 +1,109 @@
 ---
+import skin from '../skin.js';
+
 // The field is its own layer. It sticks to the viewport and travels slower
-// than the page, so the content reads as flying over it. The markings are
-// always exactly 100 yards from the hero end zone to the Endzone CTA,
-// positioned by percentage of the field layer — never in pixels.
+// than the page, so the content reads as flying over it.
+//
 // The first five yards are cut: the field opens on the five, so the ten
-// arrives one short run after the hero rather than two. SPAN is what one
-// screen-height of scroll is measured against everywhere else.
+// arrives one short run after the hero rather than two. Everything inside
+// .pitch is positioned as a percentage of that 95-yard band — never in
+// pixels — so the run holds at any page height.
 const FROM = 5, SPAN = 100 - FROM;
+const pct = (y) => ((y - FROM) / SPAN) * 100;
 const marks = [];
 for (let y = FROM; y <= 100; y++) {
   const isTen = y % 10 === 0 && y !== 100;
   marks.push({
-    y: ((y - FROM) / SPAN) * 100,
+    y: pct(y),
     kind: y === 100 ? 'goal' : isTen ? 'ten' : y % 5 === 0 ? 'five' : 'one',
     num: isTen ? String(y <= 50 ? y : 100 - y) : null,
     arrow: isTen && y !== 50 ? (y < 50 ? 'up' : 'down') : null,
   });
 }
+// the midfield logo is painted across the 50, ten yards either side of it
+const LOGO_TOP = pct(40), LOGO_H = pct(60) - pct(40);
 ---
 <div class="turf-stage" aria-hidden="true">
   <div class="turf-scroll" id="turfScroll">
-    <div class="turf"></div>
-    {['l', 'r'].map(side => (
-      <div class={`rail rail-${side}`}>
-        <span class="sideline"></span>
-        {marks.map(m => <span class={`mk mk-${m.kind}`} style={`top:${m.y}%`}></span>)}
-        {marks.filter(m => m.num).map(m => (
-          <span class="ynum" style={`top:${m.y}%`}>
-            <b class="d1">{m.num[0]}</b>
-            <b class="d2">{m.num[1]}</b>
-            {m.arrow && <i class={`arw ${m.arrow}`}></i>}
-          </span>
-        ))}
+    <div class="pitch" id="pitch">
+      <div class="turf"></div>
+
+      {/* painted at midfield, spanning the 40 to the 40 */}
+      <div class="midfield" style={`top:${LOGO_TOP}%;height:${LOGO_H}%`}>
+        <span set:html={skin.brand.navMark}></span>
+        <span set:html={skin.brand.navCity}></span>
       </div>
-    ))}
-    {/* hash marks — two inboard rows, one yard apart, as on a real field */}
-    {['hl', 'hr'].map(h => (
-      <div class={`hash ${h}`}>
-        {marks.filter(m => m.kind !== 'goal').map(m => (
-          <span class="hm" style={`top:${m.y}%`}></span>
-        ))}
-      </div>
-    ))}
+
+      {['l', 'r'].map(side => (
+        <div class={`rail rail-${side}`}>
+          <span class="sideline"></span>
+          {marks.map(m => <span class={`mk mk-${m.kind}`} style={`top:${m.y}%`}></span>)}
+          {marks.filter(m => m.num).map(m => (
+            <span class="ynum" style={`top:${m.y}%`}>
+              <b class="d1">{m.num[0]}</b>
+              <b class="d2">{m.num[1]}</b>
+              {m.arrow && <i class={`arw ${m.arrow}`}></i>}
+            </span>
+          ))}
+        </div>
+      ))}
+      {/* hash marks — two inboard rows, one yard apart, as on a real field */}
+      {['hl', 'hr'].map(h => (
+        <div class={`hash ${h}`}>
+          {marks.filter(m => m.kind !== 'goal').map(m => (
+            <span class="hm" style={`top:${m.y}%`}></span>
+          ))}
+        </div>
+      ))}
+    </div>
   </div>
 </div>
 
 <script>
-  // Parallax: the field travels a fraction of the page's distance, so the
-  // content flies over it. Everything is recomputed on resize because the
-  // field's height changes with the content.
+  // Parallax. The layer's offset is a plain function of how far the page has
+  // scrolled, counted from the very top — so it is already drifting on the
+  // first notch of the wheel, while the hero is still on screen, rather than
+  // snapping into motion once the field reaches the viewport.
+  //
+  // Because of that head start, the 95-yard band cannot begin at the top of
+  // the moving layer: by the time the field's top edge first appears, the
+  // layer has already travelled `lead` pixels. The band is offset by exactly
+  // that much, so the five-yard line meets the field's top edge on cue, and
+  // the goal line lands as the Endzone CTA arrives.
   const stage = document.querySelector('.turf-stage');
   const scroll = document.getElementById('turfScroll');
+  const pitch = document.getElementById('pitch');
   const field = document.querySelector('.field');
-  if (stage && scroll && field && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (stage && scroll && pitch && field && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     // 1 = locked to the page, 0 = static. Slower on small screens so the
     // sliver of field reads as ground a long way below.
     const rateFor = () => (window.innerWidth <= 900 ? 0.10 : 0.18);
-    let RATE = rateFor();
-    let fieldTop = 0, range = 1, travel = 0, ticking = false;
+    let RATE = rateFor(), stopAt = 1, ticking = false;
 
     const measure = () => {
       const vh = window.innerHeight;
       RATE = rateFor();
-      const r = field.getBoundingClientRect();
-      fieldTop = r.top + window.scrollY;
-      range = Math.max(1, field.offsetHeight - vh);
-      travel = range * RATE;
-      scroll.style.height = `${vh + travel}px`;
+      const fieldTop = field.getBoundingClientRect().top + window.scrollY;
+      const fieldH = field.offsetHeight;
+
+      // the layer stops moving once the field's bottom reaches the viewport
+      // bottom, so the footer never has field sliding behind it
+      stopAt = Math.max(1, fieldTop + fieldH - vh);
+
+      const lead = Math.max(0, fieldTop - vh) * RATE;   // travelled before the field shows
+      const band = fieldH * RATE + vh;                  // what the 95 yards must cover
+
+      scroll.style.height = `${lead + band}px`;
+      pitch.style.top = `${lead}px`;
+      pitch.style.height = `${band}px`;
       // one yard. The field runs the five to the goal line — 95 yards — so
-      // the stripes and paint stay locked to the numerals.
-      scroll.style.setProperty('--yd', `${(vh + travel) / 95}px`);
+      // the stripes, the paint and the midfield logo stay locked to the numerals.
+      pitch.style.setProperty('--yd', `${band / 95}px`);
       place();
     };
     const place = () => {
-      const p = Math.min(1, Math.max(0, (window.scrollY - fieldTop) / range));
-      scroll.style.transform = `translate3d(0,${-(p * travel).toFixed(1)}px,0)`;
+      const y = Math.min(window.scrollY, stopAt) * RATE;
+      scroll.style.transform = `translate3d(0,${-y.toFixed(1)}px,0)`;
       ticking = false;
     };
     const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(place); } };

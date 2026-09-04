@@ -873,7 +873,23 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 
 .field{position:relative;background:#123B63}
 .turf-stage{position:sticky;top:0;height:100vh;overflow:hidden;z-index:0;margin-bottom:-100vh}
-.turf-scroll{position:absolute;left:0;right:0;top:0;height:100vh;will-change:transform}
+.turf-scroll{position:absolute;left:0;right:0;top:0;height:100vh;will-change:transform;
+  background:#123B63}
+/* the 95-yard band. JS sets its top and height; everything inside is
+   positioned as a percentage of it, so the run holds at any page height. */
+.pitch{position:absolute;left:0;right:0;top:0;height:100%}
+
+/* ---- midfield logo: painted across the 50, ten yards either side ---- */
+.midfield{position:absolute;left:0;right:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;overflow:hidden;pointer-events:none}
+.midfield span{display:block;font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;
+  text-transform:uppercase;letter-spacing:.05em;line-height:.9;white-space:nowrap;
+  font-size:calc(var(--yd,12.4px) * 6.5);
+  color:rgba(255,255,255,.17);
+  -webkit-text-stroke:2px rgba(255,255,255,.22)}
+@media (max-width:900px){
+  .midfield span{font-size:calc(var(--yd,12.4px) * 5);-webkit-text-stroke-width:1px}
+}
 
 /* turf: base green, mowing bands across the field, a little grain.
    --yd is one yard in px, set by the parallax script from the field layer's
