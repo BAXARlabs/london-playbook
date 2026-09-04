@@ -1128,26 +1128,28 @@ footer{background-color:var(--navy)}
   .filter{flex:0 0 auto;white-space:nowrap}
 }
 
-/* ══════════════ MOBILE: FULL-BLEED SECTIONS OVER THE FIELD ══════════════
-   The content runs edge to edge to win back the width the sidelines were
-   taking. The plate is near-solid everywhere the copy sits, and drops to
-   ~55% in a band exactly as wide as the sideline strip, so the yard
-   numbers actually read through at the two page edges. The wrap inset is
-   set to clear that band entirely. */
+/* ══════════════ MOBILE: ONE SIDELINE, LEFT ══════════════
+   On a phone there is not enough width for two rails. The right rail is
+   dropped entirely and the content takes that space back. The left rail
+   stays and the section plate drops to 55% over exactly its width, so the
+   yard numbers read down one edge. The plate itself sits a little off
+   solid so a hint of field carries behind the tours. */
 @media (max-width:900px){
   .field > section,.field > div:not(.turf-stage){margin-left:0;margin-right:0}
+
+  /* right rail and both hash rows go — the left sideline is the whole motif */
+  .rail-r{display:none}
+  .hash{display:none}
 
   .field .lineup,
   .field .packages,
   .field .scoreboard-section{
     background-color:transparent;
     background-image:linear-gradient(90deg,
-      rgba(250,250,250,.55)  0px,
-      rgba(250,250,250,.55)  34px,
-      rgba(250,250,250,.995) 44px,
-      rgba(250,250,250,.995) calc(100% - 44px),
-      rgba(250,250,250,.55)  calc(100% - 34px),
-      rgba(250,250,250,.55)  100%)}
+      rgba(250,250,250,.55) 0px,
+      rgba(250,250,250,.55) 34px,
+      rgba(250,250,250,.93) 46px,
+      rgba(250,250,250,.93) 100%)}
 
   /* folds live inside .wrap, so they never cross the sideline — keep solid */
   .field .sheet{background-color:#fff;background-image:none}
@@ -1155,20 +1157,18 @@ footer{background-color:var(--navy)}
   .field .red-canvas{
     background-color:transparent;
     background-image:linear-gradient(90deg,
-      rgba(200,16,46,.62)  0px,
-      rgba(200,16,46,.62)  34px,
-      rgba(200,16,46,.995) 44px,
-      rgba(200,16,46,.995) calc(100% - 44px),
-      rgba(200,16,46,.62)  calc(100% - 34px),
-      rgba(200,16,46,.62)  100%)}
+      rgba(200,16,46,.62) 0px,
+      rgba(200,16,46,.62) 34px,
+      rgba(200,16,46,.96) 46px,
+      rgba(200,16,46,.96) 100%)}
 
   /* the touchdown band stays solid — it is end zone, not field */
   .field .touchdown{background-color:#0A2542}
 
-  /* cards and rows sit on the section, so they stay solid */
-  .field .tour,.field .pack{background-color:#fff}
+  /* cards sit slightly off solid so the field carries behind the grid */
+  .field .tour,.field .pack{background-color:rgba(255,255,255,.94)}
 
-  /* copy starts past the translucent band, never on it */
-  .field .wrap{padding-left:44px;padding-right:44px}
-  .field .tour-grid{gap:10px}
+  /* copy starts past the left band; the right edge is content now */
+  .field .wrap{padding-left:46px;padding-right:16px}
+  .field .tour-grid{gap:12px}
 }
