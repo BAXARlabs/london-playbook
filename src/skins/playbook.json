@@ -90,7 +90,7 @@
     "overrides": {}
   },
   "media": {
-    "hero": "assets/images/hero-london.jpg",
+    "hero": "assets/images/hero-london-skyline.jpg",
     "band": "assets/images/london-scrapbook.jpg"
   }
 }

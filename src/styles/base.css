@@ -686,7 +686,7 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 /* the photo bleeds 14% past the section top and bottom and is translated by
    --hero-y, set from scroll, so it drifts slower than the page */
 .hero-section.has-photo::before{content:"";position:absolute;left:0;right:0;top:-22%;bottom:-22%;z-index:-2;
-  background-image:var(--hero-img);background-size:cover;background-position:center 70%;
+  background-image:var(--hero-img);background-size:cover;background-position:center 60%;
   filter:saturate(.55) contrast(1.06);
   transform:translate3d(0,var(--hero-y,0px),0);will-change:transform}
 @media (prefers-reduced-motion:reduce){
