@@ -351,7 +351,7 @@
     .hero .ofline{font-size:18px;letter-spacing:.3em}
     .hero .subtag{font-size:13px;letter-spacing:.16em;margin:18px 0 18px}
     .hero .tagline{font-size:15px;line-height:1.5;margin-bottom:28px}
-    .hero-section{min-height:540px}
+    .hero-section{min-height:720px}
     .hero-bg{opacity:.18}
 
     .scoreboard-section{padding:56px 0}
@@ -783,8 +783,11 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 .hero-section.has-photo .wordmark{text-shadow:0 3px 0 var(--red-shadow)}
 .hero-section.has-photo .tagline{color:rgba(255,255,255,.97)}
 @media (max-width:860px){
-  .hero-section.has-photo .hero-plate{padding:32px 20px 34px}
-  .hero-section.has-photo .hero{padding:44px 0 52px}
+  /* the plate was covering nearly the whole photo on a phone. It now sits in
+     from both edges and stops short top and bottom, so the skyline reads
+     around it rather than only through it. */
+  .hero-section.has-photo .hero-plate{padding:26px 18px 28px;margin-left:6px;margin-right:6px}
+  .hero-section.has-photo .hero{padding:26px 0 30px}
 }
 /* plate lightened from .78 to .58 — 11.5:1 was far more contrast than the
    4.5 floor needs, and the surplus was just making the hero murky */
