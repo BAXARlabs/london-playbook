@@ -985,8 +985,8 @@ footer{background-color:var(--navy)}
 /* ---- goal lines: full width across both end zones ---- */
 .endzone{border-top:9px solid rgba(255,255,255,.96)}
 
-/* ---- sections let a hint of field through ---- */
-@media (min-width:901px){
+/* ---- sections let a hint of field through, at every size ---- */
+@media all{
   .field .lineup{background-color:rgba(250,250,250,.93)}
   .field .packages{background-color:rgba(255,255,255,.93)}
   .field .sheet{background-color:rgba(255,255,255,.94)}
@@ -1050,3 +1050,40 @@ footer{background-color:var(--navy)}
 .td-word,.td-bangs{font-size:clamp(30px,6.4vw,92px)}
 .td-word{letter-spacing:.10em}
 .td-inner{padding:0 8px}
+
+/* ---- mobile: the yard numbers were switched off entirely ----
+   A 16px strip could not hold them, so the strip widens enough to carry a
+   small painted numeral and the numbers come back. Hash marks stay off —
+   there is genuinely no room for them. */
+@media (max-width:900px){
+  .field > section,.field > div:not(.turf-stage){margin-left:38px;margin-right:38px}
+  .rail{width:38px}
+  .sideline{width:3px}
+  .mk{height:2px}
+  .mk-one{width:7px}
+  .mk-five{width:16px}
+  .mk-ten{width:22px;height:3px}
+  .mk-goal{width:38px;height:4px}
+  .ynum{display:block}
+  .ynum b{font-size:17px;width:19px;color:rgba(255,255,255,.96)}
+  .rail-l .ynum b{left:9px}
+  .rail-r .ynum b{right:9px}
+  .rail-l .ynum .d1{top:-20px} .rail-l .ynum .d2{top:3px}
+  .rail-r .ynum .d1{top:3px}   .rail-r .ynum .d2{top:-20px}
+  .arw{border-left-width:4px;border-right-width:4px}
+  .rail-l .arw{left:15px} .rail-r .arw{right:15px}
+  .arw.up{border-bottom-width:6px;top:-31px;border-bottom-color:rgba(255,255,255,.96)}
+  .arw.down{border-top-width:6px;top:26px;border-top-color:rgba(255,255,255,.96)}
+  .hash{display:none}
+  /* the turf was darkened so far it swallowed the paint */
+  .turf{filter:saturate(.78) brightness(.88)}
+}
+@media (max-width:420px){
+  .field > section,.field > div:not(.turf-stage){margin-left:34px;margin-right:34px}
+  .rail{width:34px}
+  .mk-goal{width:34px}
+  .ynum b{font-size:15px;width:17px}
+  .rail-l .ynum b{left:8px} .rail-r .ynum b{right:8px}
+  .rail-l .ynum .d1{top:-18px} .rail-l .ynum .d2{top:2px}
+  .rail-r .ynum .d1{top:2px}   .rail-r .ynum .d2{top:-18px}
+}
