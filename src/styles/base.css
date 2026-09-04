@@ -865,7 +865,7 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
    ══════════════════════════════════════════════════════════════ */
 .hash-rule{display:none}
 
-.field{position:relative;background:#1E6B34}
+.field{position:relative;background:#123B63}
 .turf-stage{position:sticky;top:0;height:100vh;overflow:hidden;z-index:0;margin-bottom:-100vh}
 .turf-scroll{position:absolute;left:0;right:0;top:0;height:100vh;will-change:transform}
 
@@ -875,7 +875,7 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
     repeating-linear-gradient(180deg,
       rgba(255,255,255,.045) 0 62px,
       rgba(0,0,0,.045) 62px 124px),
-    radial-gradient(120% 60% at 50% 0%, #2A7C41 0%, #1E6B34 55%, #185B2C 100%)}
+    radial-gradient(120% 60% at 50% 0%, #1B5288 0%, #123B63 55%, #0D2E4E 100%)}
 .turf::after{content:"";position:absolute;inset:0;opacity:.28;
   background-image:radial-gradient(rgba(255,255,255,.16) 1px,transparent 1px);
   background-size:4px 4px}
@@ -893,7 +893,7 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 .mk{position:absolute;height:4px;background:rgba(255,255,255,.92)}
 .mk-one{width:14px}
 .mk-five{width:150px}
-.mk-ten{width:150px;height:5px}
+.mk-ten{width:56px;height:5px}
 .mk-goal{width:150px;height:8px}
 .rail-l .mk{left:0}
 .rail-r .mk{right:0}
@@ -976,3 +976,40 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
   .mk-five{width:9px}
   .mk-ten,.mk-goal{width:16px}
 }
+
+/* ---- the field ends at the Endzone CTA; nothing below it is see-through ---- */
+.endzone,footer{position:relative;z-index:3}
+.endzone{background-color:var(--red)}
+footer{background-color:var(--navy)}
+
+/* ---- goal lines: full width across both end zones ---- */
+.endzone{border-top:9px solid rgba(255,255,255,.96)}
+
+/* ---- sections let a hint of field through ---- */
+@media (min-width:901px){
+  .field .lineup{background-color:rgba(250,250,250,.93)}
+  .field .packages{background-color:rgba(255,255,255,.93)}
+  .field .sheet{background-color:rgba(255,255,255,.94)}
+  .field .fold{background-color:transparent}
+  .field .fold-head:hover{background-color:rgba(250,250,250,.6)}
+  .field .scoreboard-section{background-color:rgba(255,255,255,.90)}
+  .field .red-canvas{background-color:rgba(200,16,46,.94)}
+  .field .tour{background-color:rgba(255,255,255,.97)}
+  .field .pack{background-color:rgba(255,255,255,.96)}
+}
+
+/* ---- goal line under the hero ----
+   The hero's ::after is already the photo wash, so the pseudo-element version
+   never rendered. A border is full-width and cannot collide. */
+.hero-section{border-bottom:9px solid rgba(255,255,255,.96)}
+.hero-section::after{bottom:0}
+.hero-section.has-photo::after{bottom:0}
+
+/* ---- hash marks belong on the turf, not under the content ----
+   At the real inboard third they landed behind the semi-transparent sections
+   and read as dashed columns running through the page. Moved inside the
+   sideline strip where they are actually visible as field. */
+.hash.hl{left:112px}
+.hash.hr{right:112px}
+@media (max-width:1399px){ .hash.hl{left:64px} .hash.hr{right:64px} }
+@media (max-width:900px){ .hash{display:none} }

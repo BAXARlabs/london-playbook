@@ -51,7 +51,7 @@ for (let y = 0; y <= 100; y++) {
   if (stage && scroll && field && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     // 1 = locked to the page, 0 = static. Slower on small screens so the
     // sliver of field reads as ground a long way below.
-    const rateFor = () => (window.innerWidth <= 900 ? 0.22 : 0.45);
+    const rateFor = () => (window.innerWidth <= 900 ? 0.10 : 0.18);
     let RATE = rateFor();
     let fieldTop = 0, range = 1, travel = 0, ticking = false;
 
