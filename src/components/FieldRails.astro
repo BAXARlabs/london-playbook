@@ -22,16 +22,24 @@ for (let y = FROM; y <= 100; y++) {
 }
 // the midfield logo is painted across the 50, ten yards either side of it
 const LOGO_TOP = pct(40), LOGO_H = pct(60) - pct(40);
+// the end zone: the last ten yards, painted on the field itself
+const EZ_TOP = pct(90);
 ---
 <div class="turf-stage" aria-hidden="true">
   <div class="turf-scroll" id="turfScroll">
     <div class="pitch" id="pitch">
       <div class="turf"></div>
 
-      {/* painted at midfield, spanning the 40 to the 40 */}
+      {/* the end zone — the last ten yards of turf, hatched, so the
+          TOUCHDOWN band is field rather than a slab laid on top of it */}
+      <div class="ez-paint" style={`top:${EZ_TOP}%`}></div>
+
+      {/* painted at midfield, spanning the 40 to the 40 — the hero lockup,
+          same three lines, same fonts, sized in yards instead of pixels */}
       <div class="midfield" style={`top:${LOGO_TOP}%;height:${LOGO_H}%`}>
-        <span set:html={skin.brand.navMark}></span>
-        <span set:html={skin.brand.navCity}></span>
+        <span class="mf-mark" set:html={skin.brand.wordmarkTop}></span>
+        <span class="mf-line" set:html={skin.brand.wordmarkBottom}></span>
+        <span class="mf-sub">{skin.hero.subtag}</span>
       </div>
 
       {['l', 'r'].map(side => (

@@ -708,9 +708,19 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
   border-top:2px solid var(--navy);border-bottom:2px solid var(--navy)}
 .scrapbook::before{content:"";position:absolute;inset:0;z-index:-2;
   background-image:var(--band-img);background-size:cover;background-position:center;
-  filter:saturate(.4) contrast(1.05)}
+  filter:saturate(.72) contrast(1.04)}
+/* the wash was heavy enough to bury the photo. It is lighter now, and the
+   type earns its contrast from a plate behind the copy rather than from
+   drowning the whole picture. */
 .scrapbook::after{content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(180deg,rgba(15,27,60,.90) 0%,rgba(15,27,60,.80) 45%,rgba(122,9,24,.86) 100%)}
+  background:linear-gradient(180deg,rgba(15,27,60,.62) 0%,rgba(15,27,60,.54) 45%,rgba(122,9,24,.66) 100%)}
+.scrapbook .wrap{position:relative}
+/* a soft, edgeless veil under the copy — full width and fully feathered, so
+   it adds contrast without drawing a box across the collage */
+.scrapbook .wrap::before{content:"";position:absolute;left:-6%;right:-6%;top:50%;
+  transform:translateY(-50%);height:calc(100% + 90px);
+  background:radial-gradient(66% 62% at 50% 50%, rgba(9,16,34,.50) 0%, rgba(9,16,34,.28) 52%, transparent 84%);
+  z-index:-1;pointer-events:none}
 .sb-label{display:block;font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;
   letter-spacing:.34em;font-size:12.5px;color:var(--white);opacity:.82;margin-bottom:14px}
 .sb-copy{max-width:46ch;margin:0 auto;font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;
@@ -879,16 +889,37 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
    positioned as a percentage of it, so the run holds at any page height. */
 .pitch{position:absolute;left:0;right:0;top:0;height:100%}
 
-/* ---- midfield logo: painted across the 50, ten yards either side ---- */
+/* ---- midfield logo: painted across the 50, ten yards either side ----
+   It is the hero lockup rendered as turf paint: the same three lines in the
+   same faces, but every size is a multiple of --yd, so the logo stays twenty
+   yards tall whatever the page height. */
 .midfield{position:absolute;left:0;right:0;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;overflow:hidden;pointer-events:none}
-.midfield span{display:block;font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;
-  text-transform:uppercase;letter-spacing:.05em;line-height:.9;white-space:nowrap;
-  font-size:calc(var(--yd,12.4px) * 6.5);
-  color:rgba(255,255,255,.17);
-  -webkit-text-stroke:2px rgba(255,255,255,.22)}
+  align-items:center;justify-content:center;text-align:center;
+  overflow:hidden;pointer-events:none;
+  --paint:rgba(255,255,255,.19);--paint-edge:rgba(255,255,255,.26)}
+.midfield span{display:block;white-space:nowrap;color:var(--paint)}
+.midfield .mf-mark{
+  font-family:'Permanent Marker',cursive;font-weight:400;
+  font-size:calc(var(--yd,12.4px) * 7.4);line-height:.85;letter-spacing:.005em;
+  transform:rotate(-3deg);
+  -webkit-text-stroke:2px var(--paint-edge)}
+.midfield .mf-line{
+  font-family:'Oswald',sans-serif;font-style:italic;font-weight:700;
+  text-transform:uppercase;letter-spacing:.36em;text-indent:.36em;
+  font-size:calc(var(--yd,12.4px) * 2.3);line-height:1;
+  transform:skew(-8deg);margin-top:calc(var(--yd,12.4px) * .9);
+  -webkit-text-stroke:1px var(--paint-edge)}
+.midfield .mf-sub{
+  font-family:'Oswald',sans-serif;font-style:italic;font-weight:600;
+  text-transform:uppercase;letter-spacing:.18em;text-indent:.18em;
+  font-size:calc(var(--yd,12.4px) * 1.15);line-height:1;
+  margin-top:calc(var(--yd,12.4px) * 1.2)}
 @media (max-width:900px){
-  .midfield span{font-size:calc(var(--yd,12.4px) * 5);-webkit-text-stroke-width:1px}
+  /* one rail, less width — the wordmark alone carries it */
+  .midfield{--paint:rgba(255,255,255,.16)}
+  .midfield .mf-mark{font-size:calc(var(--yd,12.4px) * 5.4);-webkit-text-stroke-width:1px}
+  .midfield .mf-line{font-size:calc(var(--yd,12.4px) * 1.7);letter-spacing:.24em;text-indent:.24em;-webkit-text-stroke-width:0}
+  .midfield .mf-sub{display:none}
 }
 
 /* turf: base green, mowing bands across the field, a little grain.
@@ -1087,17 +1118,20 @@ footer{background-color:var(--navy)}
    runs sideline to sideline, goal line across the top, end line at the foot,
    and the payoff painted across it. */
 .field > section.touchdown{margin-left:0;margin-right:0}
-.touchdown{position:relative;z-index:1;overflow:hidden;
+/* The band itself paints nothing. The turf, the hatch and the goal line all
+   come from the field layer underneath, so this reads as the last ten yards
+   of the field rather than a slab dropped on top of it. */
+.touchdown{position:relative;z-index:1;
   padding:82px 24px 86px;text-align:center;
-  border-top:9px solid rgba(255,255,255,.96);
-  border-bottom:6px solid rgba(255,255,255,.96);
+  background:none;border:none}
+
+/* the end zone, painted on the field: the diagonal stripe a lot of end zones
+   carry, over a slightly deeper turf, running from the ten to the goal line */
+.ez-paint{position:absolute;left:0;right:0;bottom:0;
   background:
-    repeating-linear-gradient(180deg,rgba(255,255,255,.035) 0 54px,rgba(0,0,0,.05) 54px 108px),
-    linear-gradient(180deg,#0E3055 0%,#0A2542 100%)}
-/* the diagonal paint a lot of end zones carry */
-.touchdown::before{content:"";position:absolute;inset:0;opacity:.16;
-  background:repeating-linear-gradient(135deg,
-    rgba(255,255,255,.5) 0 3px,transparent 3px 26px)}
+    repeating-linear-gradient(135deg,
+      rgba(255,255,255,.13) 0 3px, transparent 3px 26px),
+    linear-gradient(180deg, rgba(6,20,40,.35) 0%, rgba(6,20,40,.62) 100%)}
 .td-inner{position:relative;display:flex;align-items:baseline;justify-content:center;gap:.06em;flex-wrap:wrap}
 .td-word{font-family:'Oswald',sans-serif;font-weight:700;font-style:italic;text-transform:uppercase;
   font-size:clamp(40px,8.4vw,124px);line-height:.92;letter-spacing:.14em;color:rgba(255,255,255,.97);
@@ -1111,7 +1145,7 @@ footer{background-color:var(--navy)}
 .pylon.pl{left:0}
 .pylon.pr{right:0}
 @media (max-width:900px){
-  .touchdown{padding:52px 16px 56px;border-top-width:4px;border-bottom-width:4px}
+  .touchdown{padding:52px 16px 56px}
   .pylon{width:10px;height:22px;top:-4px}
 }
 /* it was overflowing and being clipped at the sides */
@@ -1208,8 +1242,6 @@ footer{background-color:var(--navy)}
   .rail-r{display:none}
   .hash{display:none}
 
-  /* the touchdown band stays solid — it is end zone, not field */
-  .field .touchdown{background-color:#0A2542}
 
   .field .wrap{padding-left:16px;padding-right:16px}
   .field .tour-grid{gap:12px}
