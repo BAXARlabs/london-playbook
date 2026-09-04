@@ -3,12 +3,16 @@
 // than the page, so the content reads as flying over it. The markings are
 // always exactly 100 yards from the hero end zone to the Endzone CTA,
 // positioned by percentage of the field layer — never in pixels.
+// The first five yards are cut: the field opens on the five, so the ten
+// arrives one short run after the hero rather than two. SPAN is what one
+// screen-height of scroll is measured against everywhere else.
+const FROM = 5, SPAN = 100 - FROM;
 const marks = [];
-for (let y = 0; y <= 100; y++) {
-  const isTen = y % 10 === 0 && y !== 0 && y !== 100;
+for (let y = FROM; y <= 100; y++) {
+  const isTen = y % 10 === 0 && y !== 100;
   marks.push({
-    y,
-    kind: y === 0 || y === 100 ? 'goal' : isTen ? 'ten' : y % 5 === 0 ? 'five' : 'one',
+    y: ((y - FROM) / SPAN) * 100,
+    kind: y === 100 ? 'goal' : isTen ? 'ten' : y % 5 === 0 ? 'five' : 'one',
     num: isTen ? String(y <= 50 ? y : 100 - y) : null,
     arrow: isTen && y !== 50 ? (y < 50 ? 'up' : 'down') : null,
   });
@@ -63,8 +67,9 @@ for (let y = 0; y <= 100; y++) {
       range = Math.max(1, field.offsetHeight - vh);
       travel = range * RATE;
       scroll.style.height = `${vh + travel}px`;
-      // one yard, so the mowing stripes stay locked to five-yard bands
-      scroll.style.setProperty('--yd', `${(vh + travel) / 100}px`);
+      // one yard. The field runs the five to the goal line — 95 yards — so
+      // the stripes and paint stay locked to the numerals.
+      scroll.style.setProperty('--yd', `${(vh + travel) / 95}px`);
       place();
     };
     const place = () => {

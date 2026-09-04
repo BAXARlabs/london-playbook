@@ -52,15 +52,27 @@
       "sub": "Big 12 at Wembley"
     },
     {
+      "n": 272,
+      "label": "Tube Stations",
+      "sub": "11 lines since 1863"
+    },
+    {
+      "n": 3500,
+      "comma": true,
+      "suffix": "+",
+      "label": "London Pubs",
+      "sub": "GLA pubs audit"
+    },
+    {
+      "n": 105,
+      "label": "Free Museums",
+      "sub": "No ticket needed"
+    },
+    {
       "n": 1983,
       "comma": true,
       "label": "Years of History",
       "sub": "Founded 43 AD"
-    },
-    {
-      "star": true,
-      "label": "Stories to Tell",
-      "sub": "9 million stories"
     }
   ],
   "partners": {

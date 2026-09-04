@@ -53,7 +53,7 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_PACKS = no(), N_AROUN
     <div class="scoreboard">
       {skin.scoreboard.map(s => (
         <div class="stat">
-          <div class="n" data-count={s.star ? undefined : s.n} data-pad={s.pad || 0} data-comma={s.comma ? 1 : undefined}>{s.star ? '★' : (s.pad ? '00' : '0')}</div>
+          <div class="n" data-count={s.star ? undefined : s.n} data-pad={s.pad || 0} data-comma={s.comma ? 1 : undefined} data-suffix={s.suffix || undefined}>{s.star ? '★' : (s.comma ? s.n.toLocaleString('en-GB') : String(s.n).padStart(s.pad || 0, '0')) + (s.suffix || '')}</div>
           <div class="l">{s.label}</div>
         </div>
       ))}
@@ -293,13 +293,36 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_PACKS = no(), N_AROUN
     const c = f.dataset.cat;
     document.querySelectorAll('.tour').forEach(t => { t.style.display = (c === 'all' || t.dataset.cat === c) ? '' : 'none'; });
   }));
-  document.querySelectorAll('[data-count]').forEach(el => {
-    const target = +el.dataset.count, w = +el.dataset.pad || 0, comma = el.dataset.comma;
-    let i = 0; const step = Math.max(1, Math.round(target / 40));
-    const t = setInterval(() => {
-      i = Math.min(target, i + step);
-      el.textContent = comma ? i.toLocaleString() : String(i).padStart(w, '0');
-      if (i >= target) clearInterval(t);
-    }, 25);
-  });
+  // Stat counters. The finished number is already in the HTML, so the page
+  // reads correctly with no JS and for anyone who asked for less motion. Only
+  // if we are going to animate do we wind it back to zero, and only when the
+  // scoreboard actually comes into view.
+  {
+    const cells = [...document.querySelectorAll('[data-count]')];
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (cells.length && !still) {
+      const fmt = (el, v) => {
+        const w = +el.dataset.pad || 0, comma = el.dataset.comma, sfx = el.dataset.suffix || '';
+        return (comma ? v.toLocaleString('en-GB') : String(v).padStart(w, '0')) + sfx;
+      };
+      cells.forEach(el => { el.textContent = fmt(el, 0); });
+      const run = (el) => {
+        const target = +el.dataset.count, D = 1100, t0 = performance.now();
+        const tick = (now) => {
+          const p = Math.min(1, (now - t0) / D);
+          const e = 1 - Math.pow(1 - p, 3);          // ease-out, fast then settling
+          el.textContent = fmt(el, Math.round(target * e));
+          if (p < 1) requestAnimationFrame(tick);
+          else el.textContent = fmt(el, target);
+        };
+        requestAnimationFrame(tick);
+      };
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(en => { if (en.isIntersecting) { run(en.target); obs.unobserve(en.target); } });
+      }, { threshold: 0.4 });
+      cells.forEach(el => io.observe(el));
+      // if IntersectionObserver never fires (very short pages), settle anyway
+      setTimeout(() => cells.forEach(el => { if (el.textContent === fmt(el, 0)) run(el); }), 2500);
+    }
+  }
 </script>
