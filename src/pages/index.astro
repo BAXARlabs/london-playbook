@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import HeroBg from '../components/HeroBg.astro';
 import Fold from '../components/Fold.astro';
+import FieldRails from '../components/FieldRails.astro';
 import skin from '../skin.js';
 import toursData from '../data/tours.json';
 import venuesData from '../data/venues.json';
@@ -43,6 +44,9 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_PACKS = no(), N_AROUN
    </div>
   </div>
 </section>
+
+<div class="field">
+<FieldRails />
 
 <section class="scoreboard-section" id="scoreboard">
   <div class="wrap">
@@ -98,9 +102,8 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_PACKS = no(), N_AROUN
       </div>
     ))}
   </Fold>
-</div></div></div>
+</div></div>
 
-<div class="hash-rule"></div>
 <section class="lineup" id="lineup">
   <div class="wrap">
     <div class="section-no">{N_LINEUP} · The Starting Lineup</div>
@@ -131,7 +134,6 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_PACKS = no(), N_AROUN
   </div>
 </section>
 
-<div class="hash-rule"></div>
 <section class="packages" id="packages">
   <div class="wrap">
     <div class="section-no">{N_PACKS} · Bundles</div>
@@ -225,9 +227,10 @@ const N_GAMEDAY = no(), N_THERE = no(), N_LINEUP = no(), N_PACKS = no(), N_AROUN
       ))}
     </div>
   </Fold>
-</div></div></div>
+</div></div>
 
-<div class="hash-rule"></div>
+</div>
+
 <section class="red-canvas endzone" id="endzone">
   <div class="wrap">
     <span class="small-caps">Endzone</span>

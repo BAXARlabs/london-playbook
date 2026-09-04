@@ -854,3 +854,88 @@ a.tour{text-decoration:none;color:inherit;display:flex;flex-direction:column}
 .js-anim .lk.in{opacity:1;transform:translateY(0)}
 @media (prefers-reduced-motion:reduce){.js-anim .lk{opacity:1;transform:none;transition:none}}
 @media (max-width:860px){.lk{padding:18px 16px 16px}}
+
+/* ══════════════════════════════════════════════════════════════
+   THE FIELD
+   Hero is one end zone, the Endzone CTA is the other, and everything
+   between them is 100 yards — no matter how long the page becomes.
+   Marks are positioned by percentage, so the field stretches and the
+   numerals never distort.
+   ══════════════════════════════════════════════════════════════ */
+.hash-rule{display:none}
+
+.field{position:relative}
+.rails{position:absolute;inset:0;pointer-events:none;z-index:2}
+.rail{position:absolute;top:0;bottom:0;width:62px}
+.rail-l{left:0}
+.rail-r{right:0}
+
+/* the sideline itself */
+.sideline{position:absolute;top:0;bottom:0;width:3px;background:rgba(15,27,60,.30)}
+.rail-l .sideline{left:26px}
+.rail-r .sideline{right:26px}
+
+/* yard marks. one-yard ticks are short, five-yard lines longer, goal lines solid */
+.mk{position:absolute;height:2px;background:rgba(15,27,60,.26)}
+.mk-one{width:9px}
+.mk-five{width:20px;height:2px;background:rgba(15,27,60,.40)}
+.mk-goal{width:34px;height:4px;background:var(--red)}
+.rail-l .mk{left:26px}
+.rail-r .mk{right:26px}
+
+/* painted yard numerals — condensed, wide-tracked, turned to face the sideline
+   exactly as they are painted on a real field */
+.ynum{position:absolute;display:flex;align-items:center;gap:5px;
+  font-family:'Oswald',sans-serif;font-weight:700;font-style:normal;
+  font-size:19px;line-height:1;letter-spacing:.16em;color:rgba(15,27,60,.34);
+  white-space:nowrap;transform-origin:center}
+.ynum b{font-weight:700}
+.rail-l .ynum{left:-13px;transform:translateY(-50%) rotate(-90deg)}
+.rail-r .ynum{right:-13px;transform:translateY(-50%) rotate(90deg)}
+/* the directional arrow that points at the nearer end zone */
+.arw{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent}
+.arw.up{border-bottom:8px solid rgba(15,27,60,.34)}
+.arw.down{border-top:8px solid rgba(15,27,60,.34)}
+
+/* on the red bands the paint flips to white so the field reads continuously */
+.field .red-canvas{position:relative;z-index:1}
+.field .gameday-section ~ *{}
+
+/* end zones: a goal line where the field meets each one */
+.hero-section{border-bottom:5px solid rgba(255,255,255,.9)}
+.endzone{border-top:5px solid rgba(255,255,255,.9)}
+
+/* keep content clear of the sidelines on wide screens; below that the rails go */
+@media (min-width:1180px){ .field .wrap{padding-left:78px;padding-right:78px} }
+@media (max-width:1179px){ .rails{display:none} }
+
+/* ---- painted numerals, closer to the real thing ----
+   On a real field the two digits are painted as separate characters with a
+   clear gap, and the arrow sits tight against the number pointing at the
+   nearer goal line. */
+.rail{width:76px}
+.rail-l .sideline{left:34px}
+.rail-r .sideline{right:34px}
+.rail-l .mk{left:34px}
+.rail-r .mk{right:34px}
+.ynum{font-size:27px;letter-spacing:.26em;color:rgba(15,27,60,.42);gap:7px}
+.ynum b{font-variant-numeric:lining-nums tabular-nums}
+.rail-l .ynum{left:-16px}
+.rail-r .ynum{right:-16px}
+.arw{border-left-width:6px;border-right-width:6px}
+.arw.up{border-bottom-width:10px;border-bottom-color:rgba(15,27,60,.42)}
+.arw.down{border-top-width:10px;border-top-color:rgba(15,27,60,.42)}
+.mk-five{width:26px}
+.mk-one{width:11px}
+.mk-goal{width:42px}
+@media (min-width:1180px){ .field .wrap{padding-left:92px;padding-right:92px} }
+
+/* ---- inside the field, the coloured bands sit BETWEEN the sidelines ----
+   Running them full-bleed put navy paint on top of a red band where it could
+   not be read. Insetting them is also truer: the playing surface is bounded
+   by the sidelines, it does not run underneath them. */
+@media (min-width:1180px){
+  .field .red-canvas,
+  .field .scrapbook{margin-left:76px;margin-right:76px}
+  .field .scrapbook{border-left:2px solid var(--navy);border-right:2px solid var(--navy)}
+}
