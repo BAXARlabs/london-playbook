@@ -1130,9 +1130,10 @@ footer{background-color:var(--navy)}
 
 /* ══════════════ MOBILE: FULL-BLEED SECTIONS OVER THE FIELD ══════════════
    The content runs edge to edge to win back the width the sidelines were
-   taking. The section background is near-solid through the middle so the
-   copy sits on a clean plate, and eases to ~90% only in the narrow strip
-   over the sideline paint, so the yard numbers read through at the edges. */
+   taking. The plate is near-solid everywhere the copy sits, and drops to
+   ~55% in a band exactly as wide as the sideline strip, so the yard
+   numbers actually read through at the two page edges. The wrap inset is
+   set to clear that band entirely. */
 @media (max-width:900px){
   .field > section,.field > div:not(.turf-stage){margin-left:0;margin-right:0}
 
@@ -1141,32 +1142,25 @@ footer{background-color:var(--navy)}
   .field .scoreboard-section{
     background-color:transparent;
     background-image:linear-gradient(90deg,
-      rgba(250,250,250,.90)  0%,
-      rgba(250,250,250,.93)  6%,
-      rgba(250,250,250,.995) 13%,
-      rgba(250,250,250,.995) 87%,
-      rgba(250,250,250,.93)  94%,
-      rgba(250,250,250,.90)  100%)}
+      rgba(250,250,250,.55)  0px,
+      rgba(250,250,250,.55)  34px,
+      rgba(250,250,250,.995) 44px,
+      rgba(250,250,250,.995) calc(100% - 44px),
+      rgba(250,250,250,.55)  calc(100% - 34px),
+      rgba(250,250,250,.55)  100%)}
 
-  .field .sheet{
-    background-color:transparent;
-    background-image:linear-gradient(90deg,
-      rgba(255,255,255,.90)  0%,
-      rgba(255,255,255,.94)  6%,
-      rgba(255,255,255,.995) 13%,
-      rgba(255,255,255,.995) 87%,
-      rgba(255,255,255,.94)  94%,
-      rgba(255,255,255,.90)  100%)}
+  /* folds live inside .wrap, so they never cross the sideline — keep solid */
+  .field .sheet{background-color:#fff;background-image:none}
 
   .field .red-canvas{
     background-color:transparent;
     background-image:linear-gradient(90deg,
-      rgba(200,16,46,.90)  0%,
-      rgba(200,16,46,.93)  6%,
-      rgba(200,16,46,.995) 13%,
-      rgba(200,16,46,.995) 87%,
-      rgba(200,16,46,.93)  94%,
-      rgba(200,16,46,.90)  100%)}
+      rgba(200,16,46,.62)  0px,
+      rgba(200,16,46,.62)  34px,
+      rgba(200,16,46,.995) 44px,
+      rgba(200,16,46,.995) calc(100% - 44px),
+      rgba(200,16,46,.62)  calc(100% - 34px),
+      rgba(200,16,46,.62)  100%)}
 
   /* the touchdown band stays solid — it is end zone, not field */
   .field .touchdown{background-color:#0A2542}
@@ -1174,6 +1168,7 @@ footer{background-color:var(--navy)}
   /* cards and rows sit on the section, so they stay solid */
   .field .tour,.field .pack{background-color:#fff}
 
-  /* copy clears the translucent strip entirely */
-  .field .wrap{padding-left:26px;padding-right:26px}
+  /* copy starts past the translucent band, never on it */
+  .field .wrap{padding-left:44px;padding-right:44px}
+  .field .tour-grid{gap:10px}
 }
